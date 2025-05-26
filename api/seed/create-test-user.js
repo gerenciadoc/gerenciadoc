@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 async function createTestUser() {
   try {
     // Conectar ao MongoDB
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc:M4hyCLplkQ3Uqg0D@cluster0.mongodb.net/gerenciadoc?retryWrites=true&w=majority';
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc:M4hyCLplkQ3Uqg0D@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
     
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
@@ -77,8 +77,10 @@ async function createTestUser() {
     const users = await User.find({});
     console.log('Usuários no banco:', users.map(u => ({ email: u.email, role: u.role, isActive: u.isActive })));
     
+    return { success: true, message: 'Usuário de teste criado/atualizado com sucesso' };
   } catch (error) {
     console.error('Erro ao criar usuário de teste:', error);
+    return { success: false, error: error.message };
   } finally {
     // Fechar conexão
     await mongoose.disconnect();
@@ -86,16 +88,31 @@ async function createTestUser() {
   }
 }
 
-// Executar função
-createTestUser();
-
-// Para uso como API serverless
+// Handler para API Routes do Vercel
 module.exports = async (req, res) => {
   try {
-    await createTestUser();
-    return res.status(200).json({ message: 'Usuário de teste criado/atualizado com sucesso' });
+    // Configurar CORS
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
+    );
+    
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
+    
+    const result = await createTestUser();
+    
+    if (result.success) {
+      return res.status(200).json({ message: result.message });
+    } else {
+      return res.status(500).json({ error: result.error });
+    }
   } catch (error) {
-    console.error('Erro:', error);
+    console.error('Erro no handler:', error);
     return res.status(500).json({ error: 'Erro ao criar usuário de teste' });
   }
-};
+}

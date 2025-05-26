@@ -16,6 +16,7 @@ Antes de iniciar os testes, certifique-se de que:
 ## Teste 1: Criação de Usuário de Teste
 
 1. Acesse a URL: `https://[seu-dominio-vercel]/api/seed/create-test-user`
+   - Alternativa: Se o endpoint acima não funcionar, tente `https://[seu-dominio-vercel]/pages/api/seed/create-test-user`
 2. Verifique se a resposta é: `{"message":"Usuário de teste criado/atualizado com sucesso"}`
 3. Se ocorrer algum erro, verifique o console do navegador para mais detalhes
 
