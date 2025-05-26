@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licitações - Gerenciadoc</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="css/design-system.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-brand">GerenciaDoc</a>
+        </div>
+        <div class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-nav-item">
+                <i class="fas fa-chart-line sidebar-nav-icon"></i>
+                Dashboard
+            </a>
+            <a href="documentos.html" class="sidebar-nav-item">
+                <i class="fas fa-file-alt sidebar-nav-icon"></i>
+                Documentos
+            </a>
+            <a href="licitacoes.html" class="sidebar-nav-item active">
+                <i class="fas fa-gavel sidebar-nav-icon"></i>
+                Licitações
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-bell sidebar-nav-icon"></i>
+                Alertas
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-chart-bar sidebar-nav-icon"></i>
+                Relatórios
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-users sidebar-nav-icon"></i>
+                Colaboradores
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-cog sidebar-nav-icon"></i>
+                Configurações
+            </a>
+        </div>
+        <div class="mt-auto p-lg">
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-sign-out-alt sidebar-nav-icon"></i>
+                Sair
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile menu toggle (visible only on mobile) -->
+    <div class="d-md-none position-fixed top-0 end-0 p-md z-index-1031">
+        <button class="btn btn-primary" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">Licitações</h1>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novaLicitacaoModal">
+                    <i class="fas fa-plus me-2"></i> Nova Licitação
+                </button>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="card mt-xl">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Pesquisar licitações...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select">
+                            <option selected>Todos os status</option>
+                            <option>Aguardando abertura</option>
+                            <option>Em andamento</option>
+                            <option>Finalizada</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select">
+                            <option selected>Todos os tipos</option>
+                            <option>Pregão Eletrônico</option>
+                            <option>Concorrência</option>
+                            <option>Tomada de Preços</option>
+                            <option>Convite</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select">
+                            <option selected>Ordenar por</option>
+                            <option>Data de abertura (mais próxima)</option>
+                            <option>Data de abertura (mais distante)</option>
+                            <option>Valor (maior)</option>
+                            <option>Valor (menor)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-filter me-2"></i> Limpar filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Licitações Cards -->
+        <div class="row mt-xl">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-warning text-dark">Aguardando abertura</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Obra de Reforma - Plantão</h5>
+                        <p class="text-muted mb-3">Pregão Eletrônico</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Prefeitura Municipal de São Paulo</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 1.250.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">12/10/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">22/11/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">40%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">Em andamento</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Aquisição de Equipamentos Hospitalares</h5>
+                        <p class="text-muted mb-3">Pregão Eletrônico</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Secretaria de Saúde do Estado</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 3.750.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">05/05/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">15/06/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">75%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-success">Finalizada</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Fornecimento de Material de Escritório</h5>
+                        <p class="text-muted mb-3">Tomada de Preços</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Tribunal Regional Federal</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 450.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">10/03/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">15/04/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">100%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-warning text-dark">Aguardando abertura</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Construção de Escola Municipal</h5>
+                        <p class="text-muted mb-3">Concorrência</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Secretaria de Educação Municipal</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 5.800.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">20/11/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">15/01/2026</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">25%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">Em andamento</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Serviços de Manutenção Predial</h5>
+                        <p class="text-muted mb-3">Pregão Eletrônico</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Ministério da Economia</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 2.100.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">15/04/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">30/05/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">60%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="col-md-6 col-lg-4 mb-lg">
+                <div class="card h-100 licitacao-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-danger">Cancelada</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="licitacao-detalhe.html"><i class="fas fa-eye me-2"></i> Ver detalhes</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Aquisição de Veículos Oficiais</h5>
+                        <p class="text-muted mb-3">Pregão Eletrônico</p>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-sm mb-1 text-muted">Órgão</p>
+                                <p class="font-medium">Departamento de Trânsito Estadual</p>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                                <p class="font-medium">R$ 1.800.000,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm mb-1 text-muted">Datas</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-day me-1 text-primary"></i> Abertura</p>
+                                    <p class="font-medium">05/02/2025</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm mb-0"><i class="fas fa-calendar-check me-1 text-primary"></i> Encerramento</p>
+                                    <p class="font-medium">20/03/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-sm mb-0 text-muted">Progresso do checklist</p>
+                                <p class="text-sm mb-0 font-medium">30%</p>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between">
+                            <a href="licitacao-detalhe.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> Detalhes
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-file-pdf me-1"></i> Edital
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-xl">
+            <nav aria-label="Paginação de licitações">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Próximo</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modal Nova Licitação -->
+    <div class="modal fade" id="novaLicitacaoModal" tabindex="-1" aria-labelledby="novaLicitacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="novaLicitacaoModalLabel">Nova Licitação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-4">Preencha as informações básicas da licitação. Após salvar, você poderá adicionar documentos e detalhes adicionais.</p>
+                    
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label for="tituloLicitacao" class="form-label">Título da Licitação</label>
+                                <input type="text" class="form-control" id="tituloLicitacao" placeholder="Ex: Obra de Reforma - Plantão">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="tipoLicitacao" class="form-label">Tipo</label>
+                                <select class="form-select" id="tipoLicitacao">
+                                    <option selected>Pregão Eletrônico</option>
+                                    <option>Concorrência</option>
+                                    <option>Tomada de Preços</option>
+                                    <option>Convite</option>
+                                    <option>Leilão</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label for="orgaoLicitacao" class="form-label">Órgão</label>
+                                <input type="text" class="form-control" id="orgaoLicitacao" placeholder="Ex: Prefeitura Municipal de São Paulo">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="valorEstimado" class="form-label">Valor Estimado (R$)</label>
+                                <input type="text" class="form-control" id="valorEstimado" placeholder="Ex: 1.250.000,00">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="dataAbertura" class="form-label">Data de Abertura</label>
+                                <input type="date" class="form-control" id="dataAbertura">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataEncerramento" class="form-label">Data de Encerramento</label>
+                                <input type="date" class="form-control" id="dataEncerramento">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descricaoLicitacao" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="descricaoLicitacao" rows="3" placeholder="Descreva brevemente o objeto da licitação..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Edital (obrigatório)</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="editalFile" accept=".pdf">
+                                <button class="btn btn-outline-primary" type="button">Upload</button>
+                            </div>
+                            <div class="form-text">Arquivo PDF do edital completo da licitação.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='licitacao-detalhe.html'">Salvar e Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Mobile sidebar toggle
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            
+            if (window.innerWidth < 768 && 
+                !sidebar.contains(event.target) && 
+                !sidebarToggle.contains(event.target) &&
+                sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

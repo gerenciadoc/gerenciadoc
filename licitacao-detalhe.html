@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Licitação - Gerenciadoc</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="css/design-system.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-brand">GerenciaDoc</a>
+        </div>
+        <div class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-nav-item">
+                <i class="fas fa-chart-line sidebar-nav-icon"></i>
+                Dashboard
+            </a>
+            <a href="documentos.html" class="sidebar-nav-item">
+                <i class="fas fa-file-alt sidebar-nav-icon"></i>
+                Documentos
+            </a>
+            <a href="licitacoes.html" class="sidebar-nav-item active">
+                <i class="fas fa-gavel sidebar-nav-icon"></i>
+                Licitações
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-bell sidebar-nav-icon"></i>
+                Alertas
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-chart-bar sidebar-nav-icon"></i>
+                Relatórios
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-users sidebar-nav-icon"></i>
+                Colaboradores
+            </a>
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-cog sidebar-nav-icon"></i>
+                Configurações
+            </a>
+        </div>
+        <div class="mt-auto p-lg">
+            <a href="#" class="sidebar-nav-item">
+                <i class="fas fa-sign-out-alt sidebar-nav-icon"></i>
+                Sair
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile menu toggle (visible only on mobile) -->
+    <div class="d-md-none position-fixed top-0 end-0 p-md z-index-1031">
+        <button class="btn btn-primary" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <a href="licitacoes.html" class="btn btn-icon btn-outline-primary me-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="page-title mb-0">Obra de Reforma - Plantão</h1>
+                    <p class="text-muted mb-0">Pregão Eletrônico</p>
+                </div>
+            </div>
+            <div>
+                <span class="badge bg-warning text-dark me-2">Aguardando abertura</span>
+                <div class="dropdown d-inline-block">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ações
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Editar licitação</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf me-2"></i> Ver edital</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i> Imprimir detalhes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Excluir licitação</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações Gerais -->
+        <div class="card mt-xl">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Informações</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <p class="text-sm mb-1 text-muted">Órgão</p>
+                        <p class="font-medium">Prefeitura Municipal de São Paulo</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p class="text-sm mb-1 text-muted">Valor estimado</p>
+                        <p class="font-medium">R$ 1.250.000,00</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <p class="text-sm mb-1 text-muted">Data de Abertura</p>
+                        <p class="font-medium">12/10/2025</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <p class="text-sm mb-1 text-muted">Data de Encerramento</p>
+                        <p class="font-medium">22/11/2025</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <p class="text-sm mb-1 text-muted">Status</p>
+                        <p class="font-medium">Aguardando abertura</p>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-sm mb-1 text-muted">Descrição</p>
+                        <p>Contratação de empresa especializada para execução de obra de reforma do Plantão Médico Municipal, incluindo serviços de alvenaria, elétrica, hidráulica, pintura e acabamentos, conforme memorial descritivo e projetos anexos ao edital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progresso -->
+        <div class="card mt-lg">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Progresso do Checklist</h5>
+                <span class="badge bg-primary">40% Completo</span>
+            </div>
+            <div class="card-body">
+                <div class="progress mb-3" style="height: 10px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;"></th>
+                                <th>Item</th>
+                                <th>Categoria</th>
+                                <th>Status</th>
+                                <th style="width: 120px;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </td>
+                                <td>Certidão Negativa Federal</td>
+                                <td>Fiscal</td>
+                                <td><span class="badge bg-success">Concluído</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Ver documento">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </td>
+                                <td>Certidão Negativa Estadual</td>
+                                <td>Fiscal</td>
+                                <td><span class="badge bg-success">Concluído</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Ver documento">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </td>
+                                <td>Certidão Negativa Municipal</td>
+                                <td>Fiscal</td>
+                                <td><span class="badge bg-success">Concluído</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Ver documento">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </td>
+                                <td>Certidão de Regularidade do FGTS</td>
+                                <td>Fiscal</td>
+                                <td><span class="badge bg-success">Concluído</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Ver documento">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Certidão Negativa de Débitos Trabalhistas</td>
+                                <td>Trabalhista</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Atestado de Capacidade Técnica</td>
+                                <td>Técnica</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Registro no CREA</td>
+                                <td>Técnica</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Contrato Social</td>
+                                <td>Habilitação Jurídica</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Balanço Patrimonial</td>
+                                <td>Qualificação</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+                                </td>
+                                <td>Índices de Liquidez</td>
+                                <td>Qualificação</td>
+                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos da Licitação -->
+        <div class="card mt-lg">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Documentos da Licitação</h5>
+                <div>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adicionarDocumentoModal">
+                        <i class="fas fa-plus me-1"></i> Adicionar Documento Existente
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
+                        <i class="fas fa-upload me-1"></i> Upload Novo Arquivo
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Tabs de categorias -->
+                <ul class="nav nav-tabs mb-4" id="documentosTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="fiscal-tab" data-bs-toggle="tab" data-bs-target="#fiscal" type="button" role="tab" aria-controls="fiscal" aria-selected="true">Fiscal</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="trabalhista-tab" data-bs-toggle="tab" data-bs-target="#trabalhista" type="button" role="tab" aria-controls="trabalhista" aria-selected="false">Trabalhista</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tecnica-tab" data-bs-toggle="tab" data-bs-target="#tecnica" type="button" role="tab" aria-controls="tecnica" aria-selected="false">Técnica</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="qualificacao-tab" data-bs-toggle="tab" data-bs-target="#qualificacao" type="button" role="tab" aria-controls="qualificacao" aria-selected="false">Qualificação</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="juridica-tab" data-bs-toggle="tab" data-bs-target="#juridica" type="button" role="tab" aria-controls="juridica" aria-selected="false">Habilitação Jurídica</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="edital-tab" data-bs-toggle="tab" data-bs-target="#edital" type="button" role="tab" aria-controls="edital" aria-selected="false">Edital</button>
+                    </li>
+                </ul>
+                
+                <!-- Conteúdo das tabs -->
+                <div class="tab-content" id="documentosTabsContent">
+                    <!-- Tab Fiscal -->
+                    <div class="tab-pane fade show active" id="fiscal" role="tabpanel" aria-labelledby="fiscal-tab">
+                        <div class="documento-item p-3 border rounded mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Certidão Negativa Federal</h6>
+                                        <p class="text-muted mb-1">Arquivo: certidao_federal.pdf</p>
+                                        <p class="text-muted mb-0">Vencimento: 14/06/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="documento-item p-3 border rounded mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Certidão Negativa Estadual</h6>
+                                        <p class="text-muted mb-1">Arquivo: certidao_estadual.pdf</p>
+                                        <p class="text-muted mb-0">Vencimento: 20/05/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="documento-item p-3 border rounded mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Certidão Negativa Municipal</h6>
+                                        <p class="text-muted mb-1">Arquivo: certidao_municipal.pdf</p>
+                                        <p class="text-muted mb-0">Vencimento: 10/07/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="documento-item p-3 border rounded">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Certidão de Regularidade do FGTS</h6>
+                                        <p class="text-muted mb-1">Arquivo: certidao_fgts.pdf</p>
+                                        <p class="text-muted mb-0">Vencimento: 05/06/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Trabalhista -->
+                    <div class="tab-pane fade" id="trabalhista" role="tabpanel" aria-labelledby="trabalhista-tab">
+                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
+                            <h5 class="text-muted mb-3">Nenhum documento trabalhista adicionado</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
+                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Técnica -->
+                    <div class="tab-pane fade" id="tecnica" role="tabpanel" aria-labelledby="tecnica-tab">
+                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
+                            <h5 class="text-muted mb-3">Nenhum documento técnico adicionado</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
+                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Qualificação -->
+                    <div class="tab-pane fade" id="qualificacao" role="tabpanel" aria-labelledby="qualificacao-tab">
+                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
+                            <h5 class="text-muted mb-3">Nenhum documento de qualificação adicionado</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
+                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Habilitação Jurídica -->
+                    <div class="tab-pane fade" id="juridica" role="tabpanel" aria-labelledby="juridica-tab">
+                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
+                            <h5 class="text-muted mb-3">Nenhum documento de habilitação jurídica adicionado</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
+                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Edital -->
+                    <div class="tab-pane fade" id="edital" role="tabpanel" aria-labelledby="edital-tab">
+                        <div class="documento-item p-3 border rounded mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Edital Completo</h6>
+                                        <p class="text-muted mb-1">Arquivo: edital_pregao_eletronico_2025_001.pdf</p>
+                                        <p class="text-muted mb-0">Publicado em: 01/09/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="documento-item p-3 border rounded">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Anexo I - Memorial Descritivo</h6>
+                                        <p class="text-muted mb-1">Arquivo: anexo_i_memorial_descritivo.pdf</p>
+                                        <p class="text-muted mb-0">Publicado em: 01/09/2025</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon me-1" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Adicionar Documento Existente -->
+    <div class="modal fade" id="adicionarDocumentoModal" tabindex="-1" aria-labelledby="adicionarDocumentoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adicionarDocumentoModalLabel">Adicionar Documento Existente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-4">Selecione um documento existente no sistema para associar a esta licitação.</p>
+                    
+                    <div class="mb-3">
+                        <label for="categoriaDocumento" class="form-label">Categoria</label>
+                        <select class="form-select" id="categoriaDocumento">
+                            <option selected>Selecione uma categoria</option>
+                            <option>Fiscal</option>
+                            <option>Trabalhista</option>
+                            <option>Técnica</option>
+                            <option>Qualificação</option>
+                            <option>Habilitação Jurídica</option>
+                            <option>Edital</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pesquisaDocumento" class="form-label">Pesquisar documento</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control" id="pesquisaDocumento" placeholder="Digite o nome do documento...">
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;"></th>
+                                    <th>Nome do Documento</th>
+                                    <th>Tipo</th>
+                                    <th>Validade</th>
+                                    <th>Arquivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio1">
+                                        </div>
+                                    </td>
+                                    <td>Certidão Negativa de Débitos Trabalhistas</td>
+                                    <td>Trabalhista</td>
+                                    <td>15/08/2025</td>
+                                    <td>certidao_trabalhista.pdf</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio2">
+                                        </div>
+                                    </td>
+                                    <td>Atestado de Capacidade Técnica</td>
+                                    <td>Técnica</td>
+                                    <td>Indeterminado</td>
+                                    <td>atestado_capacidade.pdf</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio3">
+                                        </div>
+                                    </td>
+                                    <td>Registro no CREA</td>
+                                    <td>Técnica</td>
+                                    <td>30/12/2025</td>
+                                    <td>registro_crea.pdf</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio4">
+                                        </div>
+                                    </td>
+                                    <td>Contrato Social</td>
+                                    <td>Habilitação Jurídica</td>
+                                    <td>Indeterminado</td>
+                                    <td>contrato_social.pdf</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio5">
+                                        </div>
+                                    </td>
+                                    <td>Balanço Patrimonial</td>
+                                    <td>Qualificação</td>
+                                    <td>31/12/2025</td>
+                                    <td>balanco_patrimonial.pdf</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-info mt-3">
+                        <i class="fas fa-info-circle me-2"></i> O documento selecionado será associado a esta licitação e adicionado ao checklist automaticamente.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar Documento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Upload Novo Arquivo -->
+    <div class="modal fade" id="uploadArquivoModal" tabindex="-1" aria-labelledby="uploadArquivoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadArquivoModalLabel">Upload de Novo Arquivo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-4">Faça o upload de um novo arquivo para associar a esta licitação.</p>
+                    
+                    <div class="mb-3">
+                        <label for="nomeDocumento" class="form-label">Nome do Documento</label>
+                        <input type="text" class="form-control" id="nomeDocumento" placeholder="Ex: Certidão Negativa Federal">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="categoriaUpload" class="form-label">Categoria</label>
+                        <select class="form-select" id="categoriaUpload">
+                            <option selected>Selecione uma categoria</option>
+                            <option>Fiscal</option>
+                            <option>Trabalhista</option>
+                            <option>Técnica</option>
+                            <option>Qualificação</option>
+                            <option>Habilitação Jurídica</option>
+                            <option>Edital</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="dataValidade" class="form-label">Data de Validade</label>
+                        <input type="date" class="form-control" id="dataValidade">
+                        <div class="form-text">Deixe em branco para documentos sem data de validade.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Arquivo</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="arquivoUpload">
+                            <button class="btn btn-outline-primary" type="button">Upload</button>
+                        </div>
+                        <div class="form-text">Formatos aceitos: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG (máx. 10MB)</div>
+                    </div>
+                    
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="adicionarChecklist">
+                        <label class="form-check-label" for="adicionarChecklist">
+                            Adicionar ao checklist da licitação
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Salvar Documento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Mobile sidebar toggle
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            
+            if (window.innerWidth < 768 && 
+                !sidebar.contains(event.target) && 
+                !sidebarToggle.contains(event.target) &&
+                sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
