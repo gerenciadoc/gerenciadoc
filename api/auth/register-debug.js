@@ -29,7 +29,7 @@ async function connectToDatabase() {
   
   try {
     // Usar variáveis de ambiente ou fallback para credenciais de teste
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc_user:admin@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc:M4hyCLplkQ3Uqg0D@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
     console.log(`Register Debug - Conectando ao MongoDB: ${MONGODB_URI.substring(0, 30)}...`);
     
     const connection = await mongoose.connect(MONGODB_URI, {
