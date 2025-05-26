@@ -5,12 +5,12 @@
     { "src": "js/**/*.js", "use": "@vercel/static" },
     { "src": "css/**/*.css", "use": "@vercel/static" },
     { "src": "images/**/*", "use": "@vercel/static" },
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "pages/api/**/*.js", "use": "@vercel/node" }
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/auth/login", "dest": "/api/auth/login-v2.js" },
+    { "src": "/api/auth/register", "dest": "/api/auth/register-v2.js" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/pages/api/(.*)", "dest": "/pages/api/$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
