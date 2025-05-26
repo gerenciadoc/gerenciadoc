@@ -28,11 +28,19 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--main-bg);
+            overflow-x: hidden;
         }
         
         .sidebar {
             background-color: var(--sidebar-bg);
             min-height: 100vh;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            max-width: 250px;
         }
         
         .sidebar-logo {
@@ -140,7 +148,32 @@
             color: var(--info-icon);
         }
         
+        .main-content {
+            margin-left: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+        
         @media (max-width: 767.98px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: -250px;
+                z-index: 1000;
+                transition: all 0.3s;
+                width: 250px;
+                max-width: 250px;
+            }
+            
+            .sidebar.show {
+                left: 0;
+            }
+            
             .offcanvas-start {
                 width: 250px;
             }
@@ -148,17 +181,14 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar (Offcanvas no mobile) -->
-    <div class="offcanvas-md offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header d-md-none">
+    <!-- Sidebar para Mobile (Offcanvas) -->
+    <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="sidebarMenuLabel">GerenciaDoc</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body p-0">
-            <div class="sidebar h-100">
-                <div class="sidebar-logo d-none d-md-block">
-                    GerenciaDoc
-                </div>
+            <div class="sidebar-mobile h-100">
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
                         <a href="dashboard.html" class="sidebar-menu-link active">
@@ -203,7 +233,7 @@
                         </a>
                     </li>
                     <li class="sidebar-menu-item mt-5">
-                        <a href="#" class="sidebar-menu-link" id="btnLogout">
+                        <a href="#" class="sidebar-menu-link" id="btnLogoutMobile">
                             <i class="bi bi-box-arrow-right"></i>
                             Sair
                         </a>
@@ -213,235 +243,224 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar (visível apenas em desktop) -->
-            <div class="col-md-3 col-lg-2 d-none d-md-block p-0">
-                <div class="sidebar h-100">
-                    <div class="sidebar-logo">
-                        GerenciaDoc
+    <!-- Sidebar para Desktop (Fixa) -->
+    <div class="sidebar d-none d-md-block">
+        <div class="sidebar-logo">
+            GerenciaDoc
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="dashboard.html" class="sidebar-menu-link active">
+                    <i class="bi bi-speedometer2"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="documentos.html" class="sidebar-menu-link">
+                    <i class="bi bi-file-earmark-text"></i>
+                    Documentos
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="licitacoes.html" class="sidebar-menu-link">
+                    <i class="bi bi-briefcase"></i>
+                    Licitações
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="alertas.html" class="sidebar-menu-link">
+                    <i class="bi bi-bell"></i>
+                    Alertas
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="colaboradores.html" class="sidebar-menu-link">
+                    <i class="bi bi-people"></i>
+                    Colaboradores
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="relatorios.html" class="sidebar-menu-link">
+                    <i class="bi bi-bar-chart"></i>
+                    Relatórios
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="configuracoes.html" class="sidebar-menu-link">
+                    <i class="bi bi-gear"></i>
+                    Configurações
+                </a>
+            </li>
+            <li class="sidebar-menu-item mt-5">
+                <a href="#" class="sidebar-menu-link" id="btnLogout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sair
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid px-md-4 py-4">
+            <!-- Toggle Button (Mobile) -->
+            <button class="btn btn-primary d-md-none mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                <i class="bi bi-list"></i> Menu
+            </button>
+
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+            </div>
+
+            <!-- Metrics Cards -->
+            <div class="row g-3 mb-4">
+                <!-- Documentos Válidos -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="metric-card valid p-3">
+                        <div class="metric-title">Documentos Válidos</div>
+                        <div class="metric-value">42</div>
+                        <div class="metric-icon valid">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
                     </div>
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-menu-item">
-                            <a href="dashboard.html" class="sidebar-menu-link active">
-                                <i class="bi bi-speedometer2"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="documentos.html" class="sidebar-menu-link">
-                                <i class="bi bi-file-earmark-text"></i>
-                                Documentos
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="licitacoes.html" class="sidebar-menu-link">
-                                <i class="bi bi-briefcase"></i>
-                                Licitações
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="alertas.html" class="sidebar-menu-link">
-                                <i class="bi bi-bell"></i>
-                                Alertas
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="colaboradores.html" class="sidebar-menu-link">
-                                <i class="bi bi-people"></i>
-                                Colaboradores
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="relatorios.html" class="sidebar-menu-link">
-                                <i class="bi bi-bar-chart"></i>
-                                Relatórios
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item">
-                            <a href="configuracoes.html" class="sidebar-menu-link">
-                                <i class="bi bi-gear"></i>
-                                Configurações
-                            </a>
-                        </li>
-                        <li class="sidebar-menu-item mt-5">
-                            <a href="#" class="sidebar-menu-link" id="btnLogout">
-                                <i class="bi bi-box-arrow-right"></i>
-                                Sair
-                            </a>
-                        </li>
-                    </ul>
+                </div>
+
+                <!-- Prestes a Vencer -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="metric-card warning p-3">
+                        <div class="metric-title">Prestes a Vencer</div>
+                        <div class="metric-value">8</div>
+                        <div class="metric-icon warning">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentos Vencidos -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="metric-card danger p-3">
+                        <div class="metric-title">Documentos Vencidos</div>
+                        <div class="metric-value">3</div>
+                        <div class="metric-icon danger">
+                            <i class="bi bi-x-circle"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pendentes de Aprovação -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="metric-card info p-3">
+                        <div class="metric-title">Pendentes de Aprovação</div>
+                        <div class="metric-value">5</div>
+                        <div class="metric-icon info">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                <!-- Toggle Button (Mobile) -->
-                <button class="btn btn-primary d-md-none mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-                    <i class="bi bi-list"></i> Menu
-                </button>
-
-                <!-- Page Header -->
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+            <!-- Recent Documents Section -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Documentos Recentes</h5>
+                    <a href="documentos.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
                 </div>
-
-                <!-- Metrics Cards -->
-                <div class="row g-3 mb-4">
-                    <!-- Documentos Válidos -->
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="metric-card valid p-3">
-                            <div class="metric-title">Documentos Válidos</div>
-                            <div class="metric-value">42</div>
-                            <div class="metric-icon valid">
-                                <i class="bi bi-check-circle"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Prestes a Vencer -->
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="metric-card warning p-3">
-                            <div class="metric-title">Prestes a Vencer</div>
-                            <div class="metric-value">8</div>
-                            <div class="metric-icon warning">
-                                <i class="bi bi-exclamation-triangle"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Documentos Vencidos -->
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="metric-card danger p-3">
-                            <div class="metric-title">Documentos Vencidos</div>
-                            <div class="metric-value">3</div>
-                            <div class="metric-icon danger">
-                                <i class="bi bi-x-circle"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pendentes de Aprovação -->
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="metric-card info p-3">
-                            <div class="metric-title">Pendentes de Aprovação</div>
-                            <div class="metric-value">5</div>
-                            <div class="metric-icon info">
-                                <i class="bi bi-hourglass-split"></i>
-                            </div>
-                        </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Documento</th>
+                                    <th>Status</th>
+                                    <th>Validade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Certidão Negativa Federal</td>
+                                    <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
+                                    <td>15/08/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Certidão Negativa Estadual</td>
+                                    <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
+                                    <td>22/07/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Certidão Negativa Municipal</td>
+                                    <td><span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">Vence em breve</span></td>
+                                    <td>10/06/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Certidão FGTS</td>
+                                    <td><span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">Vence em breve</span></td>
+                                    <td>05/06/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Certidão Trabalhista</td>
+                                    <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
+                                    <td>30/09/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
 
-                <!-- Recent Documents Section -->
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Documentos Recentes</h5>
-                        <a href="documentos.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Documento</th>
-                                        <th>Status</th>
-                                        <th>Validade</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Certidão Negativa Federal</td>
-                                        <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
-                                        <td>15/08/2025</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Certidão Negativa Estadual</td>
-                                        <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
-                                        <td>22/07/2025</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Certidão Negativa Municipal</td>
-                                        <td><span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">Vence em breve</span></td>
-                                        <td>10/06/2025</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Certidão FGTS</td>
-                                        <td><span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">Vence em breve</span></td>
-                                        <td>05/06/2025</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Certidão Trabalhista</td>
-                                        <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success">Válido</span></td>
-                                        <td>30/09/2025</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary" data-action="download"><i class="bi bi-download"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+            <!-- Upcoming Alerts Section -->
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Próximos Alertas</h5>
+                    <a href="alertas.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <div>
+                                <h6 class="mb-1">Certidão Municipal</h6>
+                                <p class="text-muted small mb-0">Vence em 09/06/2025</p>
+                            </div>
+                            <span class="badge bg-warning text-dark rounded-pill">15 dias</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <div>
+                                <h6 class="mb-1">Certidão FGTS</h6>
+                                <p class="text-muted small mb-0">Vence em 05/06/2025</p>
+                            </div>
+                            <span class="badge bg-warning text-dark rounded-pill">10 dias</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <div>
+                                <h6 class="mb-1">Alvará de Funcionamento</h6>
+                                <p class="text-muted small mb-0">Vence em 30/06/2025</p>
+                            </div>
+                            <span class="badge bg-info text-dark rounded-pill">35 dias</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Upcoming Alerts Section -->
-                <div class="card shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Próximos Alertas</h5>
-                        <a href="alertas.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-3 py-3">
-                                <div>
-                                    <h6 class="mb-0 fw-semibold">Certidão Municipal</h6>
-                                    <small class="text-muted">Vence em 10/06/2025</small>
-                                </div>
-                                <span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">5 dias</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-3 py-3">
-                                <div>
-                                    <h6 class="mb-0 fw-semibold">Certidão FGTS</h6>
-                                    <small class="text-muted">Vence em 05/06/2025</small>
-                                </div>
-                                <span class="badge rounded-pill bg-danger bg-opacity-10 text-danger">10 dias</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-3 py-3">
-                                <div>
-                                    <h6 class="mb-0 fw-semibold">Balanço Patrimonial</h6>
-                                    <small class="text-muted">Vence em 15/06/2025</small>
-                                </div>
-                                <span class="badge rounded-pill bg-warning bg-opacity-10 text-warning">20 dias</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-3 py-3">
-                                <div>
-                                    <h6 class="mb-0 fw-semibold">Atestado de Capacidade</h6>
-                                    <small class="text-muted">Vence em 20/06/2025</small>
-                                </div>
-                                <span class="badge rounded-pill bg-info bg-opacity-10 text-info">25 dias</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </main>
+            </div>
         </div>
     </div>
 
@@ -457,8 +476,21 @@
             
             // Configurar logout
             const btnLogout = document.getElementById('btnLogout');
+            const btnLogoutMobile = document.getElementById('btnLogoutMobile');
+            
             if (btnLogout) {
                 btnLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (window.authService) {
+                        window.authService.logout();
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                });
+            }
+            
+            if (btnLogoutMobile) {
+                btnLogoutMobile.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (window.authService) {
                         window.authService.logout();
