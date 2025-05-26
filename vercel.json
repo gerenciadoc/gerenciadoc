@@ -9,7 +9,7 @@
   ],
   "routes": [
     { "src": "/api/auth/login", "dest": "/api/auth/login-v2.js" },
-    { "src": "/api/auth/register", "dest": "/api/auth/register-debug.js" },
+    { "src": "/api/auth/register", "dest": "/api/auth/register-minimal.js" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
