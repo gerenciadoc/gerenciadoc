@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciadoc.com - Cadastro</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1E5BB8;
+            --primary-white: #FFFFFF;
+            --secondary-green: #28A745;
+            --secondary-gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --danger: #DC3545;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: #174a9c;
+            border-color: #174a9c;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary-green);
+            border-color: var(--secondary-green);
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+        
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        
+        .register-form-container {
+            background-color: var(--primary-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .trial-badge {
+            background-color: var(--secondary-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-gray);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(30, 91, 184, 0.25);
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary-blue);
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .step {
+            font-size: 0.85rem;
+            color: var(--secondary-gray);
+        }
+        
+        .step.active {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .password-requirements {
+            font-size: 0.85rem;
+            color: var(--secondary-gray);
+            margin-top: 0.5rem;
+        }
+        
+        .requirement {
+            margin-bottom: 0.25rem;
+        }
+        
+        .requirement i {
+            margin-right: 0.5rem;
+        }
+        
+        .valid {
+            color: var(--secondary-green);
+        }
+        
+        .invalid {
+            color: var(--secondary-gray);
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .terms-text {
+            font-size: 0.85rem;
+            color: var(--secondary-gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row register-container">
+            <div class="col-md-8 col-lg-6 mx-auto">
+                <div class="register-form-container">
+                    <div class="logo">
+                        <h1>Gerencia<span style="color: var(--primary-blue);">DOC</span></h1>
+                        <div class="trial-badge">Teste Grátis por 5 dias</div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="step-indicator">
+                            <div class="step active">Dados Pessoais</div>
+                            <div class="step">Dados da Empresa</div>
+                            <div class="step">Confirmação</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mb-4">Dados Pessoais</h3>
+                    
+                    <form id="register-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first-name" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="first-name" placeholder="Seu nome" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="last-name" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="last-name" placeholder="Seu sobrenome" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Profissional</label>
+                            <input type="email" class="form-control" id="email" placeholder="seu@empresa.com" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" placeholder="Crie uma senha segura" required>
+                            
+                            <div class="password-requirements">
+                                <div class="requirement valid">
+                                    <i class="fas fa-check-circle"></i> Mínimo de 8 caracteres
+                                </div>
+                                <div class="requirement invalid">
+                                    <i class="fas fa-circle"></i> Pelo menos uma letra maiúscula
+                                </div>
+                                <div class="requirement invalid">
+                                    <i class="fas fa-circle"></i> Pelo menos um número
+                                </div>
+                                <div class="requirement invalid">
+                                    <i class="fas fa-circle"></i> Pelo menos um caractere especial
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="confirm-password" class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="confirm-password" placeholder="Confirme sua senha" required>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label for="terms" class="form-check-label terms-text">
+                                Concordo com os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>
+                            </label>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <a href="index.html" class="btn btn-outline-secondary">Voltar</a>
+                            <button type="button" class="btn btn-primary" id="next-step">Próximo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

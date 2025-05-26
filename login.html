@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciadoc.com - Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1E5BB8;
+            --primary-white: #FFFFFF;
+            --secondary-green: #28A745;
+            --secondary-gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --danger: #DC3545;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: #174a9c;
+            border-color: #174a9c;
+        }
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .login-form-container {
+            background-color: var(--primary-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .login-image {
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .trial-badge {
+            background-color: var(--secondary-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-gray);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(30, 91, 184, 0.25);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ced4da;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+            color: var(--secondary-gray);
+        }
+        
+        @media (max-width: 767.98px) {
+            .login-image {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row login-container">
+            <div class="col-md-6 col-lg-5 mx-auto">
+                <div class="login-form-container">
+                    <div class="logo">
+                        <h1>Gerencia<span style="color: var(--primary-blue);">DOC</span></h1>
+                        <div class="trial-badge">Teste Grátis por 5 dias</div>
+                    </div>
+                    
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" placeholder="Sua senha" required>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label for="remember" class="form-check-label">Lembrar de mim</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        
+                        <div class="text-center mt-3">
+                            <a href="#" id="forgot-password">Esqueceu sua senha?</a>
+                        </div>
+                        
+                        <div class="divider">
+                            <span>ou</span>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p>Ainda não tem uma conta?</p>
+                            <a href="cadastro.html" id="register">Cadastre-se para teste gratuito</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-7 d-none d-md-block">
+                <div class="login-image">
+                    <h2 class="mb-4">Gestão de Documentos para Licitações</h2>
+                    <p class="lead">Controle absoluto de prazos, papéis e conformidade de editais usando IA, sem perder tempo.</p>
+                    <ul class="mt-4 list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Alertas automáticos de vencimento</li>
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Dashboard de saúde documental</li>
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Checklist por modalidade de licitação</li>
+                        <li><i class="fas fa-check-circle me-2"></i> Análise de acervo técnico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

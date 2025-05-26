@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciadoc.com - Backoffice Administrativo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1E5BB8;
+            --primary-white: #FFFFFF;
+            --secondary-green: #28A745;
+            --secondary-gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --danger: #DC3545;
+            --warning: #FFC107;
+            --info: #17A2B8;
+            --dark: #343A40;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: #174a9c;
+            border-color: #174a9c;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary-green);
+            border-color: var(--secondary-green);
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: var(--primary-blue);
+        }
+        
+        .sidebar-sticky {
+            position: sticky;
+            top: 0;
+            height: calc(100vh);
+            padding-top: 1rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .sidebar .nav-link {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 0.25rem;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: var(--primary-white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar .nav-link.active {
+            color: var(--primary-white);
+            border-left-color: var(--primary-white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 0.5rem;
+        }
+        
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 1rem 1.5rem 0.5rem;
+        }
+        
+        .sidebar-logo {
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--primary-white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Main content */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+        
+        /* Dashboard cards */
+        .dashboard-card {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            height: 100%;
+        }
+        
+        .dashboard-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .dashboard-card .card-title {
+            font-size: 1rem;
+            color: var(--secondary-gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card .card-change {
+            font-size: 0.85rem;
+        }
+        
+        .dashboard-card .card-change.positive {
+            color: var(--secondary-green);
+        }
+        
+        .dashboard-card .card-change.negative {
+            color: var(--danger);
+        }
+        
+        /* User table */
+        .user-table th {
+            font-weight: 600;
+            color: var(--secondary-gray);
+        }
+        
+        .user-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .user-status.active {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--secondary-green);
+        }
+        
+        .user-status.trial {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+        
+        .user-status.expired {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+        
+        .user-status.pending {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--secondary-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 767.98px) {
+            .sidebar {
+                position: static;
+                height: auto;
+                width: 100%;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .sidebar-sticky {
+                height: auto;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 767.98px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                display: none;
+                position: fixed;
+                width: 250px;
+                height: 100vh;
+            }
+            
+            .sidebar.show {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            GerenciaDOC
+        </div>
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-users"></i> Usuários
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-file-invoice"></i> Assinaturas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-chart-line"></i> Relatórios
+                    </a>
+                </li>
+            </ul>
+            
+            <h6 class="sidebar-heading">Configurações</h6>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-cog"></i> Configurações
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-bell"></i> Notificações
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Dashboard Administrativo</h1>
+            <div>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Novo Usuário
+                </button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Cards -->
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total de Usuários</h5>
+                        <div class="card-value">1,248</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% este mês
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuários em Teste</h5>
+                        <div class="card-value">87</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i> 5% esta semana
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Taxa de Conversão</h5>
+                        <div class="card-value">32%</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i> 3% este mês
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Receita Mensal</h5>
+                        <div class="card-value">R$ 48.350</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i> 8% este mês
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Users -->
+        <div class="card mt-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Usuários Recentes</h5>
+                <div class="d-flex">
+                    <div class="input-group me-2">
+                        <input type="text" class="form-control" placeholder="Buscar usuário...">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtrar
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                            <li><a class="dropdown-item" href="#">Todos</a></li>
+                            <li><a class="dropdown-item" href="#">Ativos</a></li>
+                            <li><a class="dropdown-item" href="#">Em Teste</a></li>
+                            <li><a class="dropdown-item" href="#">Expirados</a></li>
+                            <li><a class="dropdown-item" href="#">Pendentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover user-table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Plano</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Data de Registro</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carlos Mendes</td>
+                                <td>carlos@construtoramendes.com.br</td>
+                                <td>Construtora Mendes</td>
+                                <td>Profissional</td>
+                                <td><span class="user-status active">Ativo</span></td>
+                                <td>15/04/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ana Paula Silva</td>
+                                <td>ana@silvaassociados.com.br</td>
+                                <td>Silva & Associados</td>
+                                <td>Enterprise</td>
+                                <td><span class="user-status active">Ativo</span></td>
+                                <td>10/04/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Roberto Almeida</td>
+                                <td>roberto@engealmeida.com.br</td>
+                                <td>Engenharia Almeida</td>
+                                <td>Básico</td>
+                                <td><span class="user-status trial">Em Teste</span></td>
+                                <td>22/05/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fernanda Costa</td>
+                                <td>fernanda@fconsultoria.com.br</td>
+                                <td>F Consultoria</td>
+                                <td>Profissional</td>
+                                <td><span class="user-status trial">Em Teste</span></td>
+                                <td>21/05/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Marcelo Santos</td>
+                                <td>marcelo@santosconstrucoes.com.br</td>
+                                <td>Santos Construções</td>
+                                <td>Básico</td>
+                                <td><span class="user-status expired">Expirado</span></td>
+                                <td>05/04/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Juliana Ferreira</td>
+                                <td>juliana@jfengenharia.com.br</td>
+                                <td>JF Engenharia</td>
+                                <td>Enterprise</td>
+                                <td><span class="user-status pending">Pendente</span></td>
+                                <td>23/05/2025</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Próximo</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (mobileMenuToggle && sidebar) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
