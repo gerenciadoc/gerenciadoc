@@ -8,8 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-blue: #1E5BB8;
@@ -42,16 +40,6 @@
         .btn-primary:hover {
             background-color: #174a9c;
             border-color: #174a9c;
-        }
-        
-        .btn-success {
-            background-color: var(--secondary-green);
-            border-color: var(--secondary-green);
-        }
-        
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #218838;
         }
         
         .register-container {
@@ -100,7 +88,6 @@
         
         .progress {
             height: 8px;
-            border-radius: 4px;
             background-color: #e9ecef;
         }
         
@@ -115,7 +102,7 @@
         }
         
         .step {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--secondary-gray);
         }
         
@@ -124,37 +111,20 @@
             font-weight: 600;
         }
         
-        .password-requirements {
-            font-size: 0.85rem;
-            color: var(--secondary-gray);
-            margin-top: 0.5rem;
+        .alert {
+            display: none;
+            margin-bottom: 1rem;
         }
         
-        .requirement {
-            margin-bottom: 0.25rem;
+        .password-strength {
+            height: 5px;
+            transition: all 0.3s ease;
+            margin-top: 5px;
         }
         
-        .requirement i {
-            margin-right: 0.5rem;
-        }
-        
-        .valid {
-            color: var(--secondary-green);
-        }
-        
-        .invalid {
-            color: var(--secondary-gray);
-        }
-        
-        .form-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        
-        .terms-text {
-            font-size: 0.85rem;
-            color: var(--secondary-gray);
+        .password-feedback {
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -179,68 +149,104 @@
                         </div>
                     </div>
                     
-                    <h3 class="mb-4">Dados Pessoais</h3>
+                    <div class="alert alert-danger" id="error-message" role="alert"></div>
+                    <div class="alert alert-success" id="success-message" role="alert"></div>
                     
                     <form id="register-form">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="first-name" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="first-name" placeholder="Seu nome" required>
+                        <!-- Step 1: Dados Pessoais -->
+                        <div id="step-1">
+                            <h3 class="mb-4">Dados Pessoais</h3>
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             
-                            <div class="col-md-6 mb-3">
-                                <label for="last-name" class="form-label">Sobrenome</label>
-                                <input type="text" class="form-control" id="last-name" placeholder="Seu sobrenome" required>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Corporativo</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Profissional</label>
-                            <input type="email" class="form-control" id="email" placeholder="seu@empresa.com" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Telefone</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="(00) 00000-0000" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="password" placeholder="Crie uma senha segura" required>
                             
-                            <div class="password-requirements">
-                                <div class="requirement valid">
-                                    <i class="fas fa-check-circle"></i> Mínimo de 8 caracteres
-                                </div>
-                                <div class="requirement invalid">
-                                    <i class="fas fa-circle"></i> Pelo menos uma letra maiúscula
-                                </div>
-                                <div class="requirement invalid">
-                                    <i class="fas fa-circle"></i> Pelo menos um número
-                                </div>
-                                <div class="requirement invalid">
-                                    <i class="fas fa-circle"></i> Pelo menos um caractere especial
-                                </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="password-strength"></div>
+                                <div class="password-feedback text-muted"></div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirm-password" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Telefone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" id="next-step-1">Próximo</button>
                             </div>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="confirm-password" class="form-label">Confirmar Senha</label>
-                            <input type="password" class="form-control" id="confirm-password" placeholder="Confirme sua senha" required>
+                        <!-- Step 2: Dados da Empresa -->
+                        <div id="step-2" style="display: none;">
+                            <h3 class="mb-4">Dados da Empresa</h3>
+                            
+                            <div class="mb-3">
+                                <label for="company-name" class="form-label">Nome da Empresa</label>
+                                <input type="text" class="form-control" id="company-name" name="companyName" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="cnpj" class="form-label">CNPJ</label>
+                                <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="terms" required>
+                                <label class="form-check-label" for="terms">Li e concordo com os <a href="#" target="_blank">Termos de Serviço</a> e <a href="#" target="_blank">Política de Privacidade</a></label>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" id="prev-step-2">Voltar</button>
+                                <button type="button" class="btn btn-primary" id="next-step-2">Próximo</button>
+                            </div>
                         </div>
                         
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="terms" required>
-                            <label for="terms" class="form-check-label terms-text">
-                                Concordo com os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>
-                            </label>
-                        </div>
-                        
-                        <div class="form-navigation">
-                            <a href="index.html" class="btn btn-outline-secondary">Voltar</a>
-                            <button type="button" class="btn btn-primary" id="next-step">Próximo</button>
+                        <!-- Step 3: Confirmação -->
+                        <div id="step-3" style="display: none;">
+                            <h3 class="mb-4">Confirmação</h3>
+                            
+                            <p>Por favor, confirme seus dados antes de finalizar o cadastro:</p>
+                            
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dados Pessoais</h5>
+                                    <p class="card-text"><strong>Nome:</strong> <span id="confirm-name"></span></p>
+                                    <p class="card-text"><strong>Email:</strong> <span id="confirm-email"></span></p>
+                                    <p class="card-text"><strong>Telefone:</strong> <span id="confirm-phone"></span></p>
+                                    
+                                    <h5 class="card-title mt-3">Dados da Empresa</h5>
+                                    <p class="card-text"><strong>Empresa:</strong> <span id="confirm-company"></span></p>
+                                    <p class="card-text"><strong>CNPJ:</strong> <span id="confirm-cnpj"></span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                Ao finalizar o cadastro, você terá acesso gratuito por 5 dias a todas as funcionalidades do Gerenciadoc.
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" id="prev-step-3">Voltar</button>
+                                <button type="submit" class="btn btn-success" id="submit-register">Finalizar Cadastro</button>
+                            </div>
                         </div>
                     </form>
+                    
+                    <div class="text-center mt-4">
+                        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,5 +254,255 @@
     
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth Service -->
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário já está logado
+            if (window.authService.isLoggedIn()) {
+                // Redirecionar para o dashboard
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Elementos do formulário
+            const registerForm = document.getElementById('register-form');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            // Elementos dos passos
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            
+            // Botões de navegação
+            const nextStep1 = document.getElementById('next-step-1');
+            const prevStep2 = document.getElementById('prev-step-2');
+            const nextStep2 = document.getElementById('next-step-2');
+            const prevStep3 = document.getElementById('prev-step-3');
+            const submitRegister = document.getElementById('submit-register');
+            
+            // Barra de progresso
+            const progressBar = document.querySelector('.progress-bar');
+            const steps = document.querySelectorAll('.step');
+            
+            // Validação de senha
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const passwordStrength = document.querySelector('.password-strength');
+            const passwordFeedback = document.querySelector('.password-feedback');
+            
+            // Função para verificar força da senha
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let feedback = '';
+                
+                if (password.length >= 8) strength += 1;
+                if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
+                if (password.match(/\d/)) strength += 1;
+                if (password.match(/[^a-zA-Z\d]/)) strength += 1;
+                
+                switch (strength) {
+                    case 0:
+                        passwordStrength.style.width = '0%';
+                        passwordStrength.style.backgroundColor = '';
+                        passwordFeedback.textContent = '';
+                        break;
+                    case 1:
+                        passwordStrength.style.width = '25%';
+                        passwordStrength.style.backgroundColor = '#dc3545';
+                        passwordFeedback.textContent = 'Senha fraca';
+                        passwordFeedback.style.color = '#dc3545';
+                        break;
+                    case 2:
+                        passwordStrength.style.width = '50%';
+                        passwordStrength.style.backgroundColor = '#ffc107';
+                        passwordFeedback.textContent = 'Senha média';
+                        passwordFeedback.style.color = '#ffc107';
+                        break;
+                    case 3:
+                        passwordStrength.style.width = '75%';
+                        passwordStrength.style.backgroundColor = '#28a745';
+                        passwordFeedback.textContent = 'Senha forte';
+                        passwordFeedback.style.color = '#28a745';
+                        break;
+                    case 4:
+                        passwordStrength.style.width = '100%';
+                        passwordStrength.style.backgroundColor = '#28a745';
+                        passwordFeedback.textContent = 'Senha muito forte';
+                        passwordFeedback.style.color = '#28a745';
+                        break;
+                }
+            });
+            
+            // Navegação entre passos
+            nextStep1.addEventListener('click', function() {
+                // Validar campos do passo 1
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                if (!name || !email || !password || !confirmPassword) {
+                    errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    errorMessage.textContent = 'As senhas não coincidem.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    errorMessage.textContent = 'A senha deve ter pelo menos 8 caracteres.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                // Esconder mensagens de erro
+                errorMessage.style.display = 'none';
+                
+                // Avançar para o passo 2
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                
+                // Atualizar progresso
+                progressBar.style.width = '66%';
+                progressBar.setAttribute('aria-valuenow', '66');
+                steps[0].classList.remove('active');
+                steps[1].classList.add('active');
+            });
+            
+            prevStep2.addEventListener('click', function() {
+                // Voltar para o passo 1
+                step2.style.display = 'none';
+                step1.style.display = 'block';
+                
+                // Atualizar progresso
+                progressBar.style.width = '33%';
+                progressBar.setAttribute('aria-valuenow', '33');
+                steps[1].classList.remove('active');
+                steps[0].classList.add('active');
+            });
+            
+            nextStep2.addEventListener('click', function() {
+                // Validar campos do passo 2
+                const companyName = document.getElementById('company-name').value;
+                const cnpj = document.getElementById('cnpj').value;
+                const terms = document.getElementById('terms').checked;
+                
+                if (!companyName || !cnpj) {
+                    errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                if (!terms) {
+                    errorMessage.textContent = 'Você precisa aceitar os termos de serviço.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                // Esconder mensagens de erro
+                errorMessage.style.display = 'none';
+                
+                // Preencher dados de confirmação
+                document.getElementById('confirm-name').textContent = document.getElementById('name').value;
+                document.getElementById('confirm-email').textContent = document.getElementById('email').value;
+                document.getElementById('confirm-phone').textContent = document.getElementById('phone').value || 'Não informado';
+                document.getElementById('confirm-company').textContent = companyName;
+                document.getElementById('confirm-cnpj').textContent = cnpj;
+                
+                // Avançar para o passo 3
+                step2.style.display = 'none';
+                step3.style.display = 'block';
+                
+                // Atualizar progresso
+                progressBar.style.width = '100%';
+                progressBar.setAttribute('aria-valuenow', '100');
+                steps[1].classList.remove('active');
+                steps[2].classList.add('active');
+            });
+            
+            prevStep3.addEventListener('click', function() {
+                // Voltar para o passo 2
+                step3.style.display = 'none';
+                step2.style.display = 'block';
+                
+                // Atualizar progresso
+                progressBar.style.width = '66%';
+                progressBar.setAttribute('aria-valuenow', '66');
+                steps[2].classList.remove('active');
+                steps[1].classList.add('active');
+            });
+            
+            // Submissão do formulário
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Limpar mensagens anteriores
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                
+                // Obter dados do formulário
+                const userData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    companyName: document.getElementById('company-name').value,
+                    cnpj: document.getElementById('cnpj').value,
+                    phone: document.getElementById('phone').value
+                };
+                
+                try {
+                    // Mostrar indicador de carregamento
+                    submitRegister.disabled = true;
+                    submitRegister.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processando...';
+                    
+                    // Registrar usuário
+                    const response = await window.authService.register(userData);
+                    
+                    // Mostrar mensagem de sucesso
+                    successMessage.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+                    successMessage.style.display = 'block';
+                    
+                    // Redirecionar para o dashboard após um breve delay
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                    
+                } catch (error) {
+                    // Mostrar mensagem de erro
+                    errorMessage.textContent = error.message || 'Erro ao registrar usuário. Por favor, tente novamente.';
+                    errorMessage.style.display = 'block';
+                    
+                    // Restaurar botão
+                    submitRegister.disabled = false;
+                    submitRegister.textContent = 'Finalizar Cadastro';
+                    
+                    // Voltar para o passo apropriado se o erro for relacionado a um campo específico
+                    if (error.message && (error.message.includes('email') || error.message.includes('senha'))) {
+                        step3.style.display = 'none';
+                        step1.style.display = 'block';
+                        progressBar.style.width = '33%';
+                        progressBar.setAttribute('aria-valuenow', '33');
+                        steps[2].classList.remove('active');
+                        steps[0].classList.add('active');
+                    } else if (error.message && (error.message.includes('CNPJ') || error.message.includes('empresa'))) {
+                        step3.style.display = 'none';
+                        step2.style.display = 'block';
+                        progressBar.style.width = '66%';
+                        progressBar.setAttribute('aria-valuenow', '66');
+                        steps[2].classList.remove('active');
+                        steps[1].classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
