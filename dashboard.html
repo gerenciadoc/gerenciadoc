@@ -6,6 +6,7 @@
     <title>GerenciaDoc - Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
@@ -14,8 +15,8 @@
         <i class="bi bi-list"></i>
     </button>
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
             <!-- Sidebar -->
             <nav id="sidebar">
                 <div class="logo-container">
@@ -80,7 +81,7 @@
                     <div class="user-info">
                         <span id="userName">Olá, Usuário</span>
                         <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
-                        <i class="bi bi-chevron-down"></i>
+                        <i class="bi bi-chevron-down ms-2"></i>
                     </div>
                 </div>
 
@@ -89,7 +90,7 @@
                     <h1>Dashboard</h1>
                 </div>
 
-                <!-- Metrics Cards - Novo Estilo -->
+                <!-- Metrics Cards - Estilo Aprimorado -->
                 <div class="metrics-container">
                     <!-- Documentos Válidos -->
                     <div class="metric-card valid">
@@ -129,13 +130,13 @@
                 </div>
 
                 <!-- Recent Documents Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Documentos Recentes</h5>
+                <div class="section-card">
+                    <div class="section-header">
+                        <h5 class="section-title">Documentos Recentes</h5>
                         <a href="documentos.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
+                    <div class="section-body">
+                        <div class="table-container">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -151,8 +152,8 @@
                                         <td><span class="status-badge valid">Válido</span></td>
                                         <td>15/08/2025</td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="download"><i class="bi bi-download"></i></button>
+                                            <button class="action-btn" data-action="view"><i class="bi bi-eye"></i></button>
+                                            <button class="action-btn" data-action="download"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -160,8 +161,8 @@
                                         <td><span class="status-badge valid">Válido</span></td>
                                         <td>22/07/2025</td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="download"><i class="bi bi-download"></i></button>
+                                            <button class="action-btn" data-action="view"><i class="bi bi-eye"></i></button>
+                                            <button class="action-btn" data-action="download"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,8 +170,8 @@
                                         <td><span class="status-badge warning">Vence em breve</span></td>
                                         <td>10/06/2025</td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="download"><i class="bi bi-download"></i></button>
+                                            <button class="action-btn" data-action="view"><i class="bi bi-eye"></i></button>
+                                            <button class="action-btn" data-action="download"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -178,8 +179,8 @@
                                         <td><span class="status-badge warning">Vence em breve</span></td>
                                         <td>05/06/2025</td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="download"><i class="bi bi-download"></i></button>
+                                            <button class="action-btn" data-action="view"><i class="bi bi-eye"></i></button>
+                                            <button class="action-btn" data-action="download"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -187,8 +188,8 @@
                                         <td><span class="status-badge valid">Válido</span></td>
                                         <td>30/09/2025</td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="view"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-outline-primary action-btn" data-action="download"><i class="bi bi-download"></i></button>
+                                            <button class="action-btn" data-action="view"><i class="bi bi-eye"></i></button>
+                                            <button class="action-btn" data-action="download"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -198,12 +199,12 @@
                 </div>
 
                 <!-- Upcoming Alerts Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Próximos Alertas</h5>
+                <div class="section-card">
+                    <div class="section-header">
+                        <h5 class="section-title">Próximos Alertas</h5>
                         <a href="alertas.html" class="btn btn-outline-primary btn-sm">Ver Todos</a>
                     </div>
-                    <div class="card-body">
+                    <div class="section-body">
                         <ul class="alert-list">
                             <li class="alert-item">
                                 <div class="alert-info">
