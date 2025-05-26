@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciadoc.com - Backoffice Administrativo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1E5BB8;
+            --primary-white: #FFFFFF;
+            --secondary-green: #28A745;
+            --secondary-gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --danger: #DC3545;
+            --warning: #FFC107;
+            --sidebar-width: 250px;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: #174a9c;
+            border-color: #174a9c;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+            padding: 1rem;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu a {
+            color: var(--primary-white);
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        /* Navbar */
+        .top-navbar {
+            background-color: var(--primary-white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .user-dropdown {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-dropdown img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: var(--primary-white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            height: 100%;
+        }
+        
+        .dashboard-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-card-icon {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+        
+        .dashboard-card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        /* User Status */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-active {
+            background-color: var(--secondary-green);
+        }
+        
+        .status-inactive {
+            background-color: var(--danger);
+        }
+        
+        .status-trial {
+            background-color: var(--warning);
+        }
+        
+        /* Modal */
+        .modal-header {
+            background-color: var(--primary-blue);
+            color: var(--primary-white);
+        }
+        
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .toggle-sidebar {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3>Gerencia<span style="color: var(--primary-white);">DOC</span></h3>
+            <div class="badge bg-danger">Admin</div>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#" id="users-link"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Documentos</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Relatórios</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <button class="btn toggle-sidebar d-lg-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="user-dropdown dropdown">
+                <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://via.placeholder.com/40" alt="Admin Avatar">
+                    <span id="admin-name">Administrador</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Perfil</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configurações</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" id="logout-btn"><i class="fas fa-sign-out-alt me-2"></i> Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Dashboard Content -->
+        <div id="dashboard-view">
+            <h2 class="mb-4">Dashboard Administrativo</h2>
+            
+            <div class="row">
+                <!-- Total Users Card -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Total de Usuários</h5>
+                            <i class="fas fa-users dashboard-card-icon"></i>
+                        </div>
+                        <p class="dashboard-card-value" id="total-users">0</p>
+                        <p class="text-muted">usuários registrados</p>
+                    </div>
+                </div>
+                
+                <!-- Active Users Card -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Usuários Ativos</h5>
+                            <i class="fas fa-user-check dashboard-card-icon" style="color: var(--secondary-green);"></i>
+                        </div>
+                        <p class="dashboard-card-value" id="active-users">0</p>
+                        <p class="text-muted">contas ativas</p>
+                    </div>
+                </div>
+                
+                <!-- Trial Users Card -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Em Período Trial</h5>
+                            <i class="fas fa-hourglass-half dashboard-card-icon" style="color: var(--warning);"></i>
+                        </div>
+                        <p class="dashboard-card-value" id="trial-users">0</p>
+                        <p class="text-muted">usuários em teste</p>
+                    </div>
+                </div>
+                
+                <!-- New Users Card -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Novos Usuários</h5>
+                            <i class="fas fa-user-plus dashboard-card-icon" style="color: var(--primary-blue);"></i>
+                        </div>
+                        <p class="dashboard-card-value" id="new-users">0</p>
+                        <p class="text-muted">nos últimos 7 dias</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Recent Users Table -->
+                <div class="col-lg-8 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Usuários Recentes</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary" id="view-all-users">Ver Todos</a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Empresa</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-users-table">
+                                    <!-- Será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trial Expiring Soon -->
+                <div class="col-lg-4 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h5 class="dashboard-card-title">Trial Expirando</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+                        </div>
+                        
+                        <div class="list-group" id="trial-expiring-list">
+                            <!-- Será preenchido via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Users View -->
+        <div id="users-view" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Gerenciamento de Usuários</h2>
+                <div>
+                    <button class="btn btn-outline-primary me-2" id="refresh-users-btn">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="dashboard-card mb-4">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar usuários..." id="search-users">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary active" data-filter="all">Todos</button>
+                            <button type="button" class="btn btn-outline-success" data-filter="active">Ativos</button>
+                            <button type="button" class="btn btn-outline-warning" data-filter="trial">Em Trial</button>
+                            <button type="button" class="btn btn-outline-danger" data-filter="inactive">Inativos</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Empresa</th>
+                                <th>CNPJ</th>
+                                <th>Data de Cadastro</th>
+                                <th>Trial Expira</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table">
+                            <!-- Será preenchido via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <span>Mostrando <span id="showing-users">0</span> de <span id="total-users-count">0</span> usuários</span>
+                    </div>
+                    <nav aria-label="Paginação de usuários">
+                        <ul class="pagination mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Próximo</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Details Modal -->
+    <div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userDetailsModalLabel">Detalhes do Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Informações Pessoais</h6>
+                            <p><strong>Nome:</strong> <span id="modal-user-name"></span></p>
+                            <p><strong>Email:</strong> <span id="modal-user-email"></span></p>
+                            <p><strong>Telefone:</strong> <span id="modal-user-phone"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Informações da Empresa</h6>
+                            <p><strong>Empresa:</strong> <span id="modal-user-company"></span></p>
+                            <p><strong>CNPJ:</strong> <span id="modal-user-cnpj"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Status da Conta</h6>
+                            <p><strong>Status:</strong> <span id="modal-user-status"></span></p>
+                            <p><strong>Data de Cadastro:</strong> <span id="modal-user-created"></span></p>
+                            <p><strong>Trial Expira em:</strong> <span id="modal-user-trial-expires"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Ações</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success" id="modal-activate-btn">Ativar Conta</button>
+                                <button class="btn btn-danger" id="modal-deactivate-btn">Desativar Conta</button>
+                                <button class="btn btn-warning" id="modal-extend-trial-btn" data-bs-toggle="collapse" data-bs-target="#extendTrialCollapse">Estender Trial</button>
+                            </div>
+                            <div class="collapse mt-3" id="extendTrialCollapse">
+                                <div class="card card-body">
+                                    <div class="mb-3">
+                                        <label for="extend-days" class="form-label">Dias a estender:</label>
+                                        <input type="number" class="form-control" id="extend-days" min="1" value="5">
+                                    </div>
+                                    <button class="btn btn-primary" id="confirm-extend-trial-btn">Confirmar Extensão</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth Service -->
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário está logado e é admin
+            if (!window.authService.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const userData = window.authService.getUserData();
+            if (!window.authService.isAdmin()) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Preencher nome do admin
+            document.getElementById('admin-name').textContent = userData.name;
+            
+            // Configurar botão de logout
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.authService.logout();
+            });
+            
+            // Toggle sidebar em dispositivos móveis
+            const toggleSidebar = document.querySelector('.toggle-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            
+            if (toggleSidebar) {
+                toggleSidebar.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                });
+            }
+            
+            // Navegação entre views
+            const dashboardView = document.getElementById('dashboard-view');
+            const usersView = document.getElementById('users-view');
+            const usersLink = document.getElementById('users-link');
+            const viewAllUsers = document.getElementById('view-all-users');
+            
+            usersLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                dashboardView.style.display = 'none';
+                usersView.style.display = 'block';
+                loadUsers();
+            });
+            
+            viewAllUsers.addEventListener('click', function(e) {
+                e.preventDefault();
+                dashboardView.style.display = 'none';
+                usersView.style.display = 'block';
+                loadUsers();
+            });
+            
+            document.querySelector('.sidebar-header').addEventListener('click', function() {
+                usersView.style.display = 'none';
+                dashboardView.style.display = 'block';
+                loadDashboardStats();
+            });
+            
+            // Carregar estatísticas do dashboard
+            async function loadDashboardStats() {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch('http://localhost:5000/api/admin/stats', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar estatísticas');
+                    }
+                    
+                    const stats = await response.json();
+                    
+                    // Atualizar cards
+                    document.getElementById('total-users').textContent = stats.totalUsers;
+                    document.getElementById('active-users').textContent = stats.activeUsers;
+                    document.getElementById('trial-users').textContent = stats.usersInTrial;
+                    document.getElementById('new-users').textContent = stats.newUsers;
+                    
+                    // Carregar usuários recentes
+                    loadRecentUsers();
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar estatísticas:', error);
+                    alert('Erro ao carregar estatísticas. Por favor, tente novamente.');
+                }
+            }
+            
+            // Carregar usuários recentes
+            async function loadRecentUsers() {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch('http://localhost:5000/api/admin/users', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar usuários');
+                    }
+                    
+                    const users = await response.json();
+                    
+                    // Mostrar apenas os 5 usuários mais recentes
+                    const recentUsers = users.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
+                    
+                    const recentUsersTable = document.getElementById('recent-users-table');
+                    recentUsersTable.innerHTML = '';
+                    
+                    recentUsers.forEach(user => {
+                        const row = document.createElement('tr');
+                        
+                        // Determinar classe de status
+                        let statusClass = 'status-inactive';
+                        let statusText = 'Inativo';
+                        
+                        if (user.isActive) {
+                            const now = new Date();
+                            const trialExpires = user.trialExpires ? new Date(user.trialExpires) : null;
+                            
+                            if (trialExpires && now < trialExpires) {
+                                statusClass = 'status-trial';
+                                statusText = 'Em Trial';
+                            } else {
+                                statusClass = 'status-active';
+                                statusText = 'Ativo';
+                            }
+                        }
+                        
+                        row.innerHTML = `
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.companyName}</td>
+                            <td><span class="status-indicator ${statusClass}"></span> ${statusText}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-user-btn" data-user-id="${user._id}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        `;
+                        
+                        recentUsersTable.appendChild(row);
+                    });
+                    
+                    // Adicionar event listeners para botões de visualização
+                    document.querySelectorAll('.view-user-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-user-id');
+                            openUserDetailsModal(userId);
+                        });
+                    });
+                    
+                    // Carregar usuários com trial expirando em breve
+                    loadTrialExpiringUsers(users);
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar usuários recentes:', error);
+                    alert('Erro ao carregar usuários recentes. Por favor, tente novamente.');
+                }
+            }
+            
+            // Carregar usuários com trial expirando em breve
+            function loadTrialExpiringUsers(users) {
+                const now = new Date();
+                const sevenDaysFromNow = new Date();
+                sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
+                
+                // Filtrar usuários com trial expirando nos próximos 7 dias
+                const expiringUsers = users.filter(user => {
+                    if (!user.trialExpires || !user.isActive) return false;
+                    
+                    const trialExpires = new Date(user.trialExpires);
+                    return trialExpires > now && trialExpires < sevenDaysFromNow;
+                });
+                
+                // Ordenar por data de expiração (mais próximos primeiro)
+                expiringUsers.sort((a, b) => new Date(a.trialExpires) - new Date(b.trialExpires));
+                
+                const trialExpiringList = document.getElementById('trial-expiring-list');
+                trialExpiringList.innerHTML = '';
+                
+                if (expiringUsers.length === 0) {
+                    trialExpiringList.innerHTML = '<div class="text-center p-3">Nenhum usuário com trial expirando em breve.</div>';
+                    return;
+                }
+                
+                expiringUsers.slice(0, 5).forEach(user => {
+                    const trialExpires = new Date(user.trialExpires);
+                    const daysLeft = Math.ceil((trialExpires - now) / (1000 * 60 * 60 * 24));
+                    
+                    const listItem = document.createElement('a');
+                    listItem.href = '#';
+                    listItem.className = 'list-group-item list-group-item-action';
+                    listItem.setAttribute('data-user-id', user._id);
+                    
+                    listItem.innerHTML = `
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">${user.name}</h6>
+                            <small class="text-danger">${daysLeft} dias</small>
+                        </div>
+                        <p class="mb-1">${user.email}</p>
+                        <small>${user.companyName}</small>
+                    `;
+                    
+                    trialExpiringList.appendChild(listItem);
+                    
+                    // Adicionar event listener
+                    listItem.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const userId = this.getAttribute('data-user-id');
+                        openUserDetailsModal(userId);
+                    });
+                });
+            }
+            
+            // Carregar todos os usuários para a view de gerenciamento
+            async function loadUsers() {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch('http://localhost:5000/api/admin/users', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar usuários');
+                    }
+                    
+                    const users = await response.json();
+                    
+                    // Atualizar contadores
+                    document.getElementById('total-users-count').textContent = users.length;
+                    document.getElementById('showing-users').textContent = users.length;
+                    
+                    const usersTable = document.getElementById('users-table');
+                    usersTable.innerHTML = '';
+                    
+                    users.forEach(user => {
+                        const row = document.createElement('tr');
+                        
+                        // Determinar classe de status
+                        let statusClass = 'status-inactive';
+                        let statusText = 'Inativo';
+                        let statusBadgeClass = 'bg-danger';
+                        
+                        if (user.isActive) {
+                            const now = new Date();
+                            const trialExpires = user.trialExpires ? new Date(user.trialExpires) : null;
+                            
+                            if (trialExpires && now < trialExpires) {
+                                statusClass = 'status-trial';
+                                statusText = 'Em Trial';
+                                statusBadgeClass = 'bg-warning text-dark';
+                            } else {
+                                statusClass = 'status-active';
+                                statusText = 'Ativo';
+                                statusBadgeClass = 'bg-success';
+                            }
+                        }
+                        
+                        // Formatar datas
+                        const createdAt = new Date(user.createdAt).toLocaleDateString('pt-BR');
+                        const trialExpires = user.trialExpires ? new Date(user.trialExpires).toLocaleDateString('pt-BR') : 'N/A';
+                        
+                        row.innerHTML = `
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.companyName}</td>
+                            <td>${user.cnpj || 'N/A'}</td>
+                            <td>${createdAt}</td>
+                            <td>${trialExpires}</td>
+                            <td><span class="badge ${statusBadgeClass}">${statusText}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-user-btn" data-user-id="${user._id}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                ${user.isActive ? 
+                                    `<button class="btn btn-sm btn-outline-danger deactivate-user-btn" data-user-id="${user._id}">
+                                        <i class="fas fa-user-times"></i>
+                                    </button>` : 
+                                    `<button class="btn btn-sm btn-outline-success activate-user-btn" data-user-id="${user._id}">
+                                        <i class="fas fa-user-check"></i>
+                                    </button>`
+                                }
+                                <button class="btn btn-sm btn-outline-warning extend-trial-btn" data-user-id="${user._id}">
+                                    <i class="fas fa-hourglass-half"></i>
+                                </button>
+                            </td>
+                        `;
+                        
+                        usersTable.appendChild(row);
+                    });
+                    
+                    // Adicionar event listeners para botões
+                    document.querySelectorAll('.view-user-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-user-id');
+                            openUserDetailsModal(userId);
+                        });
+                    });
+                    
+                    document.querySelectorAll('.activate-user-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-user-id');
+                            activateUser(userId);
+                        });
+                    });
+                    
+                    document.querySelectorAll('.deactivate-user-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-user-id');
+                            deactivateUser(userId);
+                        });
+                    });
+                    
+                    document.querySelectorAll('.extend-trial-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-user-id');
+                            openUserDetailsModal(userId, 'extend-trial');
+                        });
+                    });
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar usuários:', error);
+                    alert('Erro ao carregar usuários. Por favor, tente novamente.');
+                }
+            }
+            
+            // Abrir modal de detalhes do usuário
+            async function openUserDetailsModal(userId, action = null) {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar detalhes do usuário');
+                    }
+                    
+                    const user = await response.json();
+                    
+                    // Preencher modal com dados do usuário
+                    document.getElementById('modal-user-name').textContent = user.name;
+                    document.getElementById('modal-user-email').textContent = user.email;
+                    document.getElementById('modal-user-phone').textContent = user.phone || 'Não informado';
+                    document.getElementById('modal-user-company').textContent = user.companyName;
+                    document.getElementById('modal-user-cnpj').textContent = user.cnpj || 'Não informado';
+                    
+                    // Determinar status
+                    let statusText = 'Inativo';
+                    let statusClass = 'text-danger';
+                    
+                    if (user.isActive) {
+                        const now = new Date();
+                        const trialExpires = user.trialExpires ? new Date(user.trialExpires) : null;
+                        
+                        if (trialExpires && now < trialExpires) {
+                            statusText = 'Em Trial';
+                            statusClass = 'text-warning';
+                        } else {
+                            statusText = 'Ativo';
+                            statusClass = 'text-success';
+                        }
+                    }
+                    
+                    const statusElement = document.getElementById('modal-user-status');
+                    statusElement.textContent = statusText;
+                    statusElement.className = statusClass;
+                    
+                    // Formatar datas
+                    document.getElementById('modal-user-created').textContent = new Date(user.createdAt).toLocaleDateString('pt-BR');
+                    
+                    const trialExpiresElement = document.getElementById('modal-user-trial-expires');
+                    if (user.trialExpires) {
+                        const trialExpires = new Date(user.trialExpires);
+                        const now = new Date();
+                        const daysLeft = Math.ceil((trialExpires - now) / (1000 * 60 * 60 * 24));
+                        
+                        if (daysLeft > 0) {
+                            trialExpiresElement.textContent = `${trialExpires.toLocaleDateString('pt-BR')} (${daysLeft} dias restantes)`;
+                        } else {
+                            trialExpiresElement.textContent = `${trialExpires.toLocaleDateString('pt-BR')} (expirado)`;
+                        }
+                    } else {
+                        trialExpiresElement.textContent = 'Não aplicável';
+                    }
+                    
+                    // Configurar botões de ação
+                    const activateBtn = document.getElementById('modal-activate-btn');
+                    const deactivateBtn = document.getElementById('modal-deactivate-btn');
+                    
+                    if (user.isActive) {
+                        activateBtn.style.display = 'none';
+                        deactivateBtn.style.display = 'block';
+                    } else {
+                        activateBtn.style.display = 'block';
+                        deactivateBtn.style.display = 'none';
+                    }
+                    
+                    // Limpar event listeners anteriores
+                    const newActivateBtn = activateBtn.cloneNode(true);
+                    activateBtn.parentNode.replaceChild(newActivateBtn, activateBtn);
+                    
+                    const newDeactivateBtn = deactivateBtn.cloneNode(true);
+                    deactivateBtn.parentNode.replaceChild(newDeactivateBtn, deactivateBtn);
+                    
+                    const newExtendTrialBtn = document.getElementById('confirm-extend-trial-btn').cloneNode(true);
+                    document.getElementById('confirm-extend-trial-btn').parentNode.replaceChild(newExtendTrialBtn, document.getElementById('confirm-extend-trial-btn'));
+                    
+                    // Adicionar event listeners
+                    newActivateBtn.addEventListener('click', function() {
+                        activateUser(userId);
+                    });
+                    
+                    newDeactivateBtn.addEventListener('click', function() {
+                        deactivateUser(userId);
+                    });
+                    
+                    newExtendTrialBtn.addEventListener('click', function() {
+                        const days = document.getElementById('extend-days').value;
+                        extendTrial(userId, days);
+                    });
+                    
+                    // Mostrar modal
+                    const userDetailsModal = new bootstrap.Modal(document.getElementById('userDetailsModal'));
+                    userDetailsModal.show();
+                    
+                    // Se action for 'extend-trial', mostrar collapse de extensão de trial
+                    if (action === 'extend-trial') {
+                        const extendTrialCollapse = new bootstrap.Collapse(document.getElementById('extendTrialCollapse'), {
+                            show: true
+                        });
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar detalhes do usuário:', error);
+                    alert('Erro ao carregar detalhes do usuário. Por favor, tente novamente.');
+                }
+            }
+            
+            // Ativar usuário
+            async function activateUser(userId) {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/status`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ isActive: true })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao ativar usuário');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    alert('Usuário ativado com sucesso!');
+                    
+                    // Fechar modal se estiver aberto
+                    const userDetailsModal = bootstrap.Modal.getInstance(document.getElementById('userDetailsModal'));
+                    if (userDetailsModal) {
+                        userDetailsModal.hide();
+                    }
+                    
+                    // Recarregar dados
+                    if (document.getElementById('dashboard-view').style.display !== 'none') {
+                        loadDashboardStats();
+                    } else {
+                        loadUsers();
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro ao ativar usuário:', error);
+                    alert('Erro ao ativar usuário. Por favor, tente novamente.');
+                }
+            }
+            
+            // Desativar usuário
+            async function deactivateUser(userId) {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/status`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ isActive: false })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao desativar usuário');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    alert('Usuário desativado com sucesso!');
+                    
+                    // Fechar modal se estiver aberto
+                    const userDetailsModal = bootstrap.Modal.getInstance(document.getElementById('userDetailsModal'));
+                    if (userDetailsModal) {
+                        userDetailsModal.hide();
+                    }
+                    
+                    // Recarregar dados
+                    if (document.getElementById('dashboard-view').style.display !== 'none') {
+                        loadDashboardStats();
+                    } else {
+                        loadUsers();
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro ao desativar usuário:', error);
+                    alert('Erro ao desativar usuário. Por favor, tente novamente.');
+                }
+            }
+            
+            // Estender período de trial
+            async function extendTrial(userId, days) {
+                try {
+                    const token = localStorage.getItem('userToken');
+                    
+                    const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/extend-trial`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ days: parseInt(days) })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao estender período de trial');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    alert(`Período de trial estendido por ${days} dias com sucesso!`);
+                    
+                    // Fechar modal se estiver aberto
+                    const userDetailsModal = bootstrap.Modal.getInstance(document.getElementById('userDetailsModal'));
+                    if (userDetailsModal) {
+                        userDetailsModal.hide();
+                    }
+                    
+                    // Recarregar dados
+                    if (document.getElementById('dashboard-view').style.display !== 'none') {
+                        loadDashboardStats();
+                    } else {
+                        loadUsers();
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro ao estender período de trial:', error);
+                    alert('Erro ao estender período de trial. Por favor, tente novamente.');
+                }
+            }
+            
+            // Botão de atualizar usuários
+            document.getElementById('refresh-users-btn').addEventListener('click', function() {
+                loadUsers();
+            });
+            
+            // Filtros de usuários
+            document.querySelectorAll('[data-filter]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remover classe active de todos os botões
+                    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                    
+                    // Adicionar classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    // Aplicar filtro
+                    const filter = this.getAttribute('data-filter');
+                    filterUsers(filter);
+                });
+            });
+            
+            // Função para filtrar usuários
+            function filterUsers(filter) {
+                const rows = document.querySelectorAll('#users-table tr');
+                
+                rows.forEach(row => {
+                    const statusCell = row.querySelector('td:nth-child(7)');
+                    if (!statusCell) return;
+                    
+                    const statusText = statusCell.textContent.trim();
+                    
+                    if (filter === 'all') {
+                        row.style.display = '';
+                    } else if (filter === 'active' && statusText === 'Ativo') {
+                        row.style.display = '';
+                    } else if (filter === 'trial' && statusText === 'Em Trial') {
+                        row.style.display = '';
+                    } else if (filter === 'inactive' && statusText === 'Inativo') {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Atualizar contador
+                const visibleRows = document.querySelectorAll('#users-table tr[style=""]').length;
+                document.getElementById('showing-users').textContent = visibleRows;
+            }
+            
+            // Busca de usuários
+            document.getElementById('search-users').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#users-table tr');
+                
+                rows.forEach(row => {
+                    const name = row.querySelector('td:nth-child(1)');
+                    const email = row.querySelector('td:nth-child(2)');
+                    const company = row.querySelector('td:nth-child(3)');
+                    const cnpj = row.querySelector('td:nth-child(4)');
+                    
+                    if (!name || !email || !company || !cnpj) return;
+                    
+                    const nameText = name.textContent.toLowerCase();
+                    const emailText = email.textContent.toLowerCase();
+                    const companyText = company.textContent.toLowerCase();
+                    const cnpjText = cnpj.textContent.toLowerCase();
+                    
+                    if (nameText.includes(searchTerm) || 
+                        emailText.includes(searchTerm) || 
+                        companyText.includes(searchTerm) || 
+                        cnpjText.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Atualizar contador
+                const visibleRows = document.querySelectorAll('#users-table tr:not([style="display: none;"])').length;
+                document.getElementById('showing-users').textContent = visibleRows;
+            });
+            
+            // Carregar estatísticas iniciais
+            loadDashboardStats();
+        });
+    </script>
+</body>
+</html>
