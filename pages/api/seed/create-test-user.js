@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 async function createTestUser() {
   try {
     // Conectar ao MongoDB
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc:M4hyCLplkQ3Uqg0D@cluster0.mongodb.net/gerenciadoc?retryWrites=true&w=majority';
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc:M4hyCLplkQ3Uqg0D@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
     
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
