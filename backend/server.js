@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-// const mongoose = require('mongoose'); // Descomentar quando configurar o DB
+const mongoose = require('mongoose');
 
 // Importar rotas
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 dotenv.config();
 
@@ -21,21 +22,16 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes); // Usa as rotas de autenticação
+app.use("/api/admin", adminRoutes); // Usa as rotas de administração
 
-// TODO: Adicionar rotas de gerenciamento de usuários (backoffice)
 // TODO: Adicionar rotas de gestão de documentos
 // TODO: Adicionar rotas de gestão de licitações
 // TODO: Adicionar rotas do marketplace
 
-// Conexão com Banco de Dados (Placeholder - requer configuração)
-/*
-mongoose.connect(process.env.MONGO_URI, {
-  // useNewUrlParser: true, // Deprecated
-  // useUnifiedTopology: true, // Deprecated
-})
-.then(() => console.log('MongoDB Conectado'))
+// Conexão com Banco de Dados
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log('MongoDB Conectado com sucesso!'))
 .catch(err => console.error('Erro na conexão com MongoDB:', err));
-*/
 
 app.listen(PORT, () => {
   console.log(`Servidor backend rodando na porta ${PORT}`);
