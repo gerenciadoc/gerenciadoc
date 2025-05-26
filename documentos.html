@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciadoc - Gestão de Documentos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+        }
+        .sidebar {
+            background-color: var(--dark);
+            min-height: 100vh;
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: #cbd5e1;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.5rem;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .sidebar .nav-link i {
+            margin-right: 0.75rem;
+        }
+        .main-content {
+            padding: 2rem;
+        }
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.75rem 0.75rem 0 0 !important;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        .table th {
+            font-weight: 600;
+            color: var(--secondary);
+            border-bottom-width: 1px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .badge-valid {
+            background-color: var(--success);
+            color: white;
+        }
+        .badge-expiring {
+            background-color: var(--warning);
+            color: white;
+        }
+        .badge-expired {
+            background-color: var(--danger);
+            color: white;
+        }
+        .badge-pending {
+            background-color: var(--info);
+            color: white;
+        }
+        .stat-card {
+            border-left: 4px solid;
+            border-radius: 0.5rem;
+        }
+        .stat-card.primary {
+            border-left-color: var(--primary);
+        }
+        .stat-card.success {
+            border-left-color: var(--success);
+        }
+        .stat-card.warning {
+            border-left-color: var(--warning);
+        }
+        .stat-card.danger {
+            border-left-color: var(--danger);
+        }
+        .stat-card.info {
+            border-left-color: var(--info);
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .stat-icon.primary {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+        .stat-icon.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        .stat-icon.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        .stat-icon.danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        .stat-icon.info {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--info);
+        }
+        .action-icon {
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+        }
+        .action-icon:hover {
+            background-color: #f1f5f9;
+        }
+        .action-icon.view {
+            color: var(--primary);
+        }
+        .action-icon.edit {
+            color: var(--warning);
+        }
+        .action-icon.delete {
+            color: var(--danger);
+        }
+        .action-icon.download {
+            color: var(--success);
+        }
+        .modal-header {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .modal-footer {
+            border-top: 1px solid #e2e8f0;
+        }
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .form-control, .form-select {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+        }
+        .nav-tabs .nav-link {
+            color: var(--secondary);
+            border: none;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            background-color: transparent;
+        }
+        .progress {
+            height: 0.5rem;
+            border-radius: 1rem;
+        }
+        .progress-bar {
+            background-color: var(--primary);
+        }
+        .document-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .document-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .document-icon.pdf {
+            color: #ef4444;
+        }
+        .document-icon.doc {
+            color: #2563eb;
+        }
+        .document-icon.xls {
+            color: #10b981;
+        }
+        .document-icon.img {
+            color: #8b5cf6;
+        }
+        .document-icon.other {
+            color: #64748b;
+        }
+        .document-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        .document-status.valid {
+            background-color: var(--success);
+        }
+        .document-status.expiring {
+            background-color: var(--warning);
+        }
+        .document-status.expired {
+            background-color: var(--danger);
+        }
+        .document-status.pending {
+            background-color: var(--info);
+        }
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .category-badge {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .annotation-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(37, 99, 235, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .annotation-tooltip {
+            position: absolute;
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 300px;
+            z-index: 10;
+        }
+        .document-preview {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .file-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        .file-info {
+            flex-grow: 1;
+        }
+        .file-name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .file-meta {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+        .file-actions {
+            display: flex;
+        }
+        .file-progress {
+            height: 4px;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 col-md-3 px-0 sidebar">
+                <div class="d-flex align-items-center justify-content-center py-4">
+                    <h4 class="mb-0">GerenciaDoc</h4>
+                </div>
+                <div class="px-3">
+                    <div class="nav flex-column">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                        <a href="#" class="nav-link active">
+                            <i class="bi bi-file-earmark-text"></i> Documentos
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-folder"></i> Licitações
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-bell"></i> Alertas
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-person-plus"></i> Colaboradores
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-graph-up"></i> Relatórios
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-gear"></i> Configurações
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-box-arrow-right"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 col-md-9 ms-auto main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">Gestão de Documentos</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadDocumentModal">
+                        <i class="bi bi-upload"></i> Novo Documento
+                    </button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card success">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Documentos Válidos</h6>
+                                        <h3 class="mb-0">42</h3>
+                                    </div>
+                                    <div class="stat-icon success">
+                                        <i class="bi bi-check-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card warning">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Prestes a Vencer</h6>
+                                        <h3 class="mb-0">8</h3>
+                                    </div>
+                                    <div class="stat-icon warning">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card danger">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Documentos Vencidos</h6>
+                                        <h3 class="mb-0">3</h3>
+                                    </div>
+                                    <div class="stat-icon danger">
+                                        <i class="bi bi-x-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card info">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Pendentes de Aprovação</h6>
+                                        <h3 class="mb-0">5</h3>
+                                    </div>
+                                    <div class="stat-icon info">
+                                        <i class="bi bi-hourglass-split"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter and Search -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-start-0" placeholder="Buscar documentos...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select">
+                                    <option value="">Todas as Categorias</option>
+                                    <option value="certidoes">Certidões</option>
+                                    <option value="atestados">Atestados</option>
+                                    <option value="propostas">Propostas Técnicas</option>
+                                    <option value="orcamentos">Planilhas de Orçamentos</option>
+                                    <option value="cronogramas">Cronogramas</option>
+                                    <option value="encargos">Encargos Sociais</option>
+                                    <option value="bdi">Detalhamento de BDI</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select">
+                                    <option value="">Todos os Status</option>
+                                    <option value="valid">Válidos</option>
+                                    <option value="expiring">Prestes a Vencer</option>
+                                    <option value="expired">Vencidos</option>
+                                    <option value="pending">Pendentes de Aprovação</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary w-100">
+                                    <i class="bi bi-funnel"></i> Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents Grid -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status valid" title="Válido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-pdf document-icon pdf"></i>
+                                <h6 class="mb-1">Certidão Negativa Federal</h6>
+                                <p class="text-muted small mb-2">Certidões</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Validade:</span>
+                                    <span class="small fw-medium">15/08/2025</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2" data-bs-toggle="modal" data-bs-target="#viewDocumentModal"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status expiring" title="Prestes a Vencer"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-pdf document-icon pdf"></i>
+                                <h6 class="mb-1">Certidão Negativa Estadual</h6>
+                                <p class="text-muted small mb-2">Certidões</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Validade:</span>
+                                    <span class="small fw-medium text-warning">10/06/2025</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status expired" title="Vencido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-pdf document-icon pdf"></i>
+                                <h6 class="mb-1">Certidão Negativa Municipal</h6>
+                                <p class="text-muted small mb-2">Certidões</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Validade:</span>
+                                    <span class="small fw-medium text-danger">01/05/2025</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status valid" title="Válido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-excel document-icon xls"></i>
+                                <h6 class="mb-1">Planilha de Orçamento</h6>
+                                <p class="text-muted small mb-2">Planilhas de Orçamentos</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Valor:</span>
+                                    <span class="small fw-medium">R$ 1.250.000,00</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status valid" title="Válido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-word document-icon doc"></i>
+                                <h6 class="mb-1">Proposta Técnica</h6>
+                                <p class="text-muted small mb-2">Propostas Técnicas</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Licitação:</span>
+                                    <span class="small fw-medium">TP-001/2025</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status pending" title="Pendente de Aprovação"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-pdf document-icon pdf"></i>
+                                <h6 class="mb-1">Atestado de Capacidade</h6>
+                                <p class="text-muted small mb-2">Atestados</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Enviado por:</span>
+                                    <span class="small fw-medium">João Dias</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-check-circle action-icon edit me-2" style="color: var(--success);"></i>
+                                    <i class="bi bi-x-circle action-icon delete" style="color: var(--danger);"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status valid" title="Válido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-excel document-icon xls"></i>
+                                <h6 class="mb-1">Cronograma Físico-Financeiro</h6>
+                                <p class="text-muted small mb-2">Cronogramas</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Licitação:</span>
+                                    <span class="small fw-medium">TP-001/2025</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card document-card position-relative">
+                            <div class="document-status valid" title="Válido"></div>
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-excel document-icon xls"></i>
+                                <h6 class="mb-1">Detalhamento de BDI</h6>
+                                <p class="text-muted small mb-2">Detalhamento de BDI</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">BDI:</span>
+                                    <span class="small fw-medium">25,88%</span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <i class="bi bi-eye action-icon view me-2"></i>
+                                    <i class="bi bi-pencil action-icon edit me-2"></i>
+                                    <i class="bi bi-download action-icon download me-2"></i>
+                                    <i class="bi bi-trash action-icon delete"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Próximo</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Document Modal -->
+    <div class="modal fade" id="uploadDocumentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Documento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs mb-4" id="uploadTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="true">Upload</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Detalhes</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#metadata" type="button" role="tab" aria-controls="metadata" aria-selected="false">Metadados</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="uploadTabsContent">
+                        <div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+                            <div class="upload-area mb-4">
+                                <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                                <h5>Arraste e solte arquivos aqui</h5>
+                                <p class="text-muted">ou clique para selecionar arquivos</p>
+                                <input type="file" id="fileUpload" class="d-none" multiple>
+                                <button class="btn btn-primary">Selecionar Arquivos</button>
+                            </div>
+                            <div class="selected-files">
+                                <h6 class="mb-3">Arquivos Selecionados</h6>
+                                <div class="file-item">
+                                    <i class="bi bi-file-earmark-pdf file-icon pdf"></i>
+                                    <div class="file-info">
+                                        <div class="file-name">Certidão Negativa Federal.pdf</div>
+                                        <div class="file-meta">PDF • 1.2 MB</div>
+                                        <div class="progress file-progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        <i class="bi bi-check-circle-fill action-icon me-2" style="color: var(--success);"></i>
+                                        <i class="bi bi-trash action-icon delete"></i>
+                                    </div>
+                                </div>
+                                <div class="file-item">
+                                    <i class="bi bi-file-earmark-excel file-icon xls"></i>
+                                    <div class="file-info">
+                                        <div class="file-name">Planilha de Orçamento.xlsx</div>
+                                        <div class="file-meta">XLSX • 2.5 MB</div>
+                                        <div class="progress file-progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        <i class="bi bi-arrow-clockwise action-icon me-2" style="color: var(--primary);"></i>
+                                        <i class="bi bi-trash action-icon delete"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="documentType" class="form-label">Tipo de Documento</label>
+                                        <select class="form-select" id="documentType">
+                                            <option selected>Selecione o tipo</option>
+                                            <option value="certidao">Certidão</option>
+                                            <option value="atestado">Atestado</option>
+                                            <option value="proposta">Proposta Técnica</option>
+                                            <option value="orcamento">Planilha de Orçamento</option>
+                                            <option value="cronograma">Cronograma</option>
+                                            <option value="encargos">Encargos Sociais</option>
+                                            <option value="bdi">Detalhamento de BDI</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentCategory" class="form-label">Categoria</label>
+                                        <select class="form-select" id="documentCategory">
+                                            <option selected>Selecione a categoria</option>
+                                            <option value="certidoes">Certidões</option>
+                                            <option value="atestados">Atestados</option>
+                                            <option value="propostas">Propostas Técnicas</option>
+                                            <option value="orcamentos">Planilhas de Orçamentos</option>
+                                            <option value="cronogramas">Cronogramas</option>
+                                            <option value="encargos">Encargos Sociais</option>
+                                            <option value="bdi">Detalhamento de BDI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentName" class="form-label">Nome do Documento</label>
+                                        <input type="text" class="form-control" id="documentName" placeholder="Digite o nome do documento">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentDescription" class="form-label">Descrição (opcional)</label>
+                                        <input type="text" class="form-control" id="documentDescription" placeholder="Digite uma descrição">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentIssueDate" class="form-label">Data de Emissão</label>
+                                        <input type="date" class="form-control" id="documentIssueDate">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentExpiryDate" class="form-label">Data de Validade</label>
+                                        <input type="date" class="form-control" id="documentExpiryDate">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="documentTags" class="form-label">Tags (opcional)</label>
+                                        <input type="text" class="form-control" id="documentTags" placeholder="Digite tags separadas por vírgula">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="documentIssuer" class="form-label">Órgão Emissor</label>
+                                        <input type="text" class="form-control" id="documentIssuer" placeholder="Digite o órgão emissor">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documentNumber" class="form-label">Número do Documento</label>
+                                        <input type="text" class="form-control" id="documentNumber" placeholder="Digite o número do documento">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="proposalValue" class="form-label">Valor da Proposta</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">R$</span>
+                                            <input type="text" class="form-control" id="proposalValue" placeholder="0,00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="bidValue" class="form-label">Valor da Licitação</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">R$</span>
+                                            <input type="text" class="form-control" id="bidValue" placeholder="0,00">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Diferença Percentual</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="-5,25%" readonly>
+                                            <span class="input-group-text bg-success text-white">Abaixo do valor de referência</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="bidNumber" class="form-label">Número da Licitação</label>
+                                        <input type="text" class="form-control" id="bidNumber" placeholder="Digite o número da licitação">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="biddingEntity" class="form-label">Órgão Licitante</label>
+                                        <input type="text" class="form-control" id="biddingEntity" placeholder="Digite o órgão licitante">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="prevStep">Anterior</button>
+                    <button type="button" class="btn btn-primary" id="nextStep">Próximo</button>
+                    <button type="button" class="btn btn-success" id="saveDocument" style="display: none;">Salvar Documento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Document Modal -->
+    <div class="modal fade" id="viewDocumentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Certidão Negativa Federal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="position-relative">
+                                <iframe src="about:blank" class="document-preview" title="Visualização do documento"></iframe>
+                                <div class="annotation-marker" style="top: 120px; left: 250px;">1</div>
+                                <div class="annotation-marker" style="top: 220px; left: 350px;">2</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Informações do Documento</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <span class="text-muted">Tipo:</span>
+                                        <span class="fw-medium ms-2">Certidão</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Categoria:</span>
+                                        <span class="fw-medium ms-2">Certidões</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Data de Emissão:</span>
+                                        <span class="fw-medium ms-2">15/02/2025</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Data de Validade:</span>
+                                        <span class="fw-medium ms-2">15/08/2025</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Status:</span>
+                                        <span class="badge badge-valid ms-2">Válido</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Órgão Emissor:</span>
+                                        <span class="fw-medium ms-2">Receita Federal</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Número:</span>
+                                        <span class="fw-medium ms-2">123456789/2025</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="text-muted">Tags:</span>
+                                        <div class="mt-1">
+                                            <span class="category-badge">federal</span>
+                                            <span class="category-badge">certidão</span>
+                                            <span class="category-badge">fiscal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">Anotações</h6>
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="bi bi-plus-lg"></i> Nova
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 pb-3 border-bottom">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="avatar me-2" style="width: 30px; height: 30px;">MS</div>
+                                            <div>
+                                                <div class="fw-medium">Maria Silva</div>
+                                                <div class="text-muted small">25/05/2025 14:30</div>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0 small">Verificar se o número do CNPJ está correto. Parece haver um dígito errado.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="avatar me-2" style="width: 30px; height: 30px;">JD</div>
+                                            <div>
+                                                <div class="fw-medium">João Dias</div>
+                                                <div class="text-muted small">26/05/2025 09:15</div>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0 small">CNPJ confirmado, está correto. Documento validado no site da Receita Federal.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-download"></i> Download
+                    </button>
+                    <button type="button" class="btn btn-warning">
+                        <i class="bi bi-pencil"></i> Editar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Upload Tabs Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadTabs = document.querySelectorAll('#uploadTabs .nav-link');
+            const prevBtn = document.getElementById('prevStep');
+            const nextBtn = document.getElementById('nextStep');
+            const saveBtn = document.getElementById('saveDocument');
+            let currentTab = 0;
+
+            function updateButtons() {
+                prevBtn.style.display = currentTab === 0 ? 'none' : 'block';
+                nextBtn.style.display = currentTab === uploadTabs.length - 1 ? 'none' : 'block';
+                saveBtn.style.display = currentTab === uploadTabs.length - 1 ? 'block' : 'none';
+            }
+
+            updateButtons();
+
+            prevBtn.addEventListener('click', function() {
+                if (currentTab > 0) {
+                    currentTab--;
+                    uploadTabs[currentTab].click();
+                    updateButtons();
+                }
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentTab < uploadTabs.length - 1) {
+                    currentTab++;
+                    uploadTabs[currentTab].click();
+                    updateButtons();
+                }
+            });
+
+            uploadTabs.forEach((tab, index) => {
+                tab.addEventListener('shown.bs.tab', function() {
+                    currentTab = index;
+                    updateButtons();
+                });
+            });
+
+            // Simulate file selection
+            document.querySelector('.upload-area').addEventListener('click', function() {
+                document.getElementById('fileUpload').click();
+            });
+
+            // Annotation markers
+            document.querySelectorAll('.annotation-marker').forEach(marker => {
+                marker.addEventListener('click', function() {
+                    // Toggle annotation tooltip
+                    const tooltip = document.querySelector('.annotation-tooltip');
+                    if (tooltip) {
+                        tooltip.remove();
+                    } else {
+                        const newTooltip = document.createElement('div');
+                        newTooltip.className = 'annotation-tooltip';
+                        newTooltip.innerHTML = `
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="avatar me-2" style="width: 24px; height: 24px; font-size: 0.75rem;">MS</div>
+                                <div>
+                                    <div class="fw-medium small">Maria Silva</div>
+                                    <div class="text-muted" style="font-size: 0.7rem;">25/05/2025</div>
+                                </div>
+                            </div>
+                            <p class="mb-0 small">Verificar se o número do CNPJ está correto. Parece haver um dígito errado.</p>
+                        `;
+                        newTooltip.style.top = (parseInt(this.style.top) + 30) + 'px';
+                        newTooltip.style.left = (parseInt(this.style.left) + 30) + 'px';
+                        this.parentNode.appendChild(newTooltip);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
