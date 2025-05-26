@@ -108,6 +108,11 @@
             padding: 0 1rem;
             color: var(--secondary-gray);
         }
+
+        .alert {
+            display: none;
+            margin-bottom: 1rem;
+        }
         
         @media (max-width: 767.98px) {
             .login-image {
@@ -126,7 +131,10 @@
                         <div class="trial-badge">Teste Grátis por 5 dias</div>
                     </div>
                     
-                    <form>
+                    <div class="alert alert-danger" id="error-message" role="alert"></div>
+                    <div class="alert alert-success" id="success-message" role="alert"></div>
+                    
+                    <form id="login-form">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
@@ -177,5 +185,70 @@
     
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth Service -->
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário já está logado
+            if (window.authService.isLoggedIn()) {
+                // Redirecionar para o dashboard
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Manipular o envio do formulário de login
+            const loginForm = document.getElementById('login-form');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Limpar mensagens anteriores
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                try {
+                    // Mostrar indicador de carregamento
+                    const submitButton = loginForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+                    
+                    // Fazer login
+                    const userData = await window.authService.login(email, password);
+                    
+                    // Mostrar mensagem de sucesso
+                    successMessage.textContent = 'Login realizado com sucesso! Redirecionando...';
+                    successMessage.style.display = 'block';
+                    
+                    // Redirecionar para o dashboard após um breve delay
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                    
+                } catch (error) {
+                    // Mostrar mensagem de erro
+                    errorMessage.textContent = error.message || 'Erro ao fazer login. Verifique suas credenciais.';
+                    errorMessage.style.display = 'block';
+                    
+                    // Restaurar botão
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
+            });
+            
+            // Manipular o link "Esqueceu sua senha"
+            const forgotPasswordLink = document.getElementById('forgot-password');
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Funcionalidade de recuperação de senha será implementada em breve.');
+            });
+        });
+    </script>
 </body>
 </html>
