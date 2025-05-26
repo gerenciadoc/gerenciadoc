@@ -1,0 +1,11 @@
+{
+  "name": "gerenciadoc-api",
+  "version": "1.0.0",
+  "description": "API Serverless para o Gerenciadoc",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12"
+  }
+}

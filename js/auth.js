@@ -1,5 +1,7 @@
 // Configuração da API
-const API_URL = 'http://localhost:5000/api';
+const API_URL = window.location.hostname.includes('localhost') 
+    ? 'http://localhost:5000/api' 
+    : 'https://' + window.location.hostname + '/api';
 
 // Função para fazer login
 async function login(email, password) {
