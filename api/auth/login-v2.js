@@ -25,7 +25,7 @@ async function connectToDatabase() {
   }
   
   try {    // Usar variáveis de ambiente ou fallback para credenciais de teste
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://manus:gVBEVXJ6lEQzB77l@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority';
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://manus:t9iNg0rmmjbn2dxS@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
     
     const connection = await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
