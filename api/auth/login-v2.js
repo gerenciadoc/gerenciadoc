@@ -24,9 +24,8 @@ async function connectToDatabase() {
     return cachedDb;
   }
   
-  try {
-    // Usar variáveis de ambiente ou fallback para credenciais de teste
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gerenciadoc_user:5hlgNunZCHhgovLD@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+  try {    // Usar variáveis de ambiente ou fallback para credenciais de teste
+    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://manus:gVBEVXJ6lEQzB77l@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority';
     
     const connection = await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,

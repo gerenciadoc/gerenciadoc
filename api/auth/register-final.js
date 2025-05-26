@@ -123,8 +123,8 @@ module.exports = async (req, res) => {
     
     console.log('Dados validados com sucesso');
     
-    // String de conexão validada nos testes
-    const MONGODB_URI = 'mongodb+srv://gerenciadoc_user:5hlgNunZCHhgovLD@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority';
+    // String de conexão com credenciais administrativas
+    const MONGODB_URI = 'mongodb+srv://manus:gVBEVXJ6lEQzB77l@cluster0.vowrllh.mongodb.net/?retryWrites=true&w=majority';
     console.log(`Usando string de conexão: ${MONGODB_URI.substring(0, 30)}...`);
     
     // Conectar ao MongoDB com retry
