@@ -132,7 +132,12 @@
         <div class="card mt-lg">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Progresso do Checklist</h5>
-                <span class="badge bg-primary">40% Completo</span>
+                <div>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adicionarItemChecklistModal">
+                        <i class="fas fa-plus me-1"></i> Adicionar Item
+                    </button>
+                    <span class="badge bg-primary ms-2">40% Completo</span>
+                </div>
             </div>
             <div class="card-body">
                 <div class="progress mb-3" style="height: 10px;">
@@ -147,7 +152,7 @@
                                 <th>Item</th>
                                 <th>Categoria</th>
                                 <th>Status</th>
-                                <th style="width: 120px;">Ações</th>
+                                <th style="width: 150px;">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -754,5 +759,9 @@
             }
         });
     </script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Funcionalidades de Detalhes da Licitação -->
+    <script src="js/licitacao-detalhe.js"></script>
 </body>
 </html>
