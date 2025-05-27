@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,9 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <a href="#" class="sidebar-brand">GerenciaDoc</a>
+            <a href="dashboard.html" class="sidebar-brand">
+                <span class="text-success">Gerencia</span><span class="text-primary">Doc</span>
+            </a>
         </div>
         <div class="sidebar-nav">
             <a href="dashboard.html" class="sidebar-nav-item">
@@ -53,149 +55,162 @@
                 Configurações
             </a>
         </div>
-        <div class="mt-auto p-lg">
-            <a href="#" class="sidebar-nav-item">
+        <div class="mt-auto p-3">
+            <a href="login.html" class="sidebar-nav-item">
                 <i class="fas fa-sign-out-alt sidebar-nav-icon"></i>
                 Sair
             </a>
         </div>
     </div>
 
-    <!-- Mobile menu toggle (visible only on mobile) -->
-    <div class="d-md-none position-fixed top-0 end-0 p-md z-index-1031">
-        <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-
-    <!-- Menu Superior -->
-    <div class="top-menu">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-end align-items-center py-2">
-                <div class="dropdown me-3">
-                    <button class="btn btn-icon position-relative" type="button" id="notificacoesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            3
-                        </span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-notification" aria-labelledby="notificacoesDropdown">
-                        <li><h6 class="dropdown-header">Notificações</h6></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-exclamation-circle text-warning fs-5"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <p class="mb-0 fw-medium">Certidão Municipal vence em 5 dias</p>
-                                    <p class="text-muted small mb-0">Hoje, 09:45</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-file-alt text-primary fs-5"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <p class="mb-0 fw-medium">Novo documento adicionado</p>
-                                    <p class="text-muted small mb-0">Ontem, 14:30</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-gavel text-info fs-5"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <p class="mb-0 fw-medium">Licitação aberta amanhã</p>
-                                    <p class="text-muted small mb-0">Ontem, 10:15</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-center" href="#">Ver todas as notificações</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown me-3">
-                    <button class="btn btn-icon" type="button" id="ajudaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-question-circle"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajudaDropdown">
-                        <li><a class="dropdown-item" href="#">Central de Ajuda</a></li>
-                        <li><a class="dropdown-item" href="#">Tutoriais</a></li>
-                        <li><a class="dropdown-item" href="#">Suporte Técnico</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn d-flex align-items-center" type="button" id="usuarioDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="avatar-circle me-2">
-                            <span class="initials">JS</span>
-                        </div>
-                        <span class="d-none d-md-inline">João Silva</span>
-                        <i class="fas fa-chevron-down ms-2 small"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Meu Perfil</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configurações</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Sair</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <div class="main-content">
-        <div class="page-header d-flex justify-content-between align-items-center">
-            <div>
-                <h1 class="page-title">Gestão de Documentos</h1>
-            </div>
-            <div>
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus me-2"></i> Novo Documento
-                </button>
+        <!-- Top Menu -->
+        <div class="top-menu">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Placeholder para possível breadcrumb ou título da página -->
+                    </div>
+                    <div class="col-auto">
+                        <div class="top-menu-items">
+                            <!-- Notificações -->
+                            <div class="dropdown">
+                                <button class="btn btn-icon position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        3
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end notification-dropdown">
+                                    <h6 class="dropdown-header">Notificações</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="notification-item">
+                                            <div class="notification-icon bg-primary-light">
+                                                <i class="fas fa-file-alt text-primary"></i>
+                                            </div>
+                                            <div class="notification-content">
+                                                <p class="notification-text">Certidão Municipal vence em 5 dias</p>
+                                                <p class="notification-time">Há 2 horas</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="notification-item">
+                                            <div class="notification-icon bg-success-light">
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            </div>
+                                            <div class="notification-content">
+                                                <p class="notification-text">Documento aprovado: Certidão Federal</p>
+                                                <p class="notification-time">Há 5 horas</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="notification-item">
+                                            <div class="notification-icon bg-warning-light">
+                                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                                            </div>
+                                            <div class="notification-content">
+                                                <p class="notification-text">Licitação #2023-45: prazo final em 3 dias</p>
+                                                <p class="notification-time">Há 1 dia</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center" href="#">Ver todas as notificações</a>
+                                </div>
+                            </div>
+
+                            <!-- Ajuda -->
+                            <div class="dropdown">
+                                <button class="btn btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-question-circle"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <h6 class="dropdown-header">Ajuda</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-book me-2"></i> Guia do usuário
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-video me-2"></i> Tutoriais em vídeo
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-headset me-2"></i> Suporte técnico
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Perfil do usuário -->
+                            <div class="dropdown">
+                                <button class="btn btn-profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar">JS</div>
+                                    <span class="d-none d-md-inline-block ms-2">João Silva</span>
+                                    <i class="fas fa-chevron-down ms-2"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <h6 class="dropdown-header">João Silva</h6>
+                                    <p class="dropdown-text">joao.silva@empresa.com.br</p>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user me-2"></i> Meu perfil
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cog me-2"></i> Configurações
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="login.html">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Sair
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Metric Cards -->
-        <div class="row mt-lg">
-            <div class="col-md-6 col-lg-3 mb-lg">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Gestão de Documentos</h1>
+            <p class="page-subtitle">Gerencie todos os documentos da sua empresa em um só lugar</p>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="row g-lg">
+            <div class="col-md-6 col-lg-3">
                 <div class="metric-card">
                     <div class="metric-card-border-left metric-card-border-success"></div>
                     <div class="metric-card-icon metric-card-icon-success">
-                        <i class="fas fa-file-alt"></i>
+                        <i class="fas fa-check-circle"></i>
                     </div>
                     <h3 class="metric-card-title">Documentos Válidos</h3>
                     <p class="metric-card-value">42</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-lg">
+            <div class="col-md-6 col-lg-3">
                 <div class="metric-card">
                     <div class="metric-card-border-left metric-card-border-warning"></div>
                     <div class="metric-card-icon metric-card-icon-warning">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-exclamation-circle"></i>
                     </div>
-                    <h3 class="metric-card-title">Prestes a Vencer</h3>
+                    <h3 class="metric-card-title">Vencendo em Breve</h3>
                     <p class="metric-card-value">8</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-lg">
+            <div class="col-md-6 col-lg-3">
                 <div class="metric-card">
                     <div class="metric-card-border-left metric-card-border-danger"></div>
                     <div class="metric-card-icon metric-card-icon-danger">
-                        <i class="fas fa-exclamation-circle"></i>
+                        <i class="fas fa-times-circle"></i>
                     </div>
                     <h3 class="metric-card-title">Documentos Vencidos</h3>
                     <p class="metric-card-value">3</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-lg">
+            <div class="col-md-6 col-lg-3">
                 <div class="metric-card">
                     <div class="metric-card-border-left metric-card-border-info"></div>
                     <div class="metric-card-icon metric-card-icon-info">
@@ -286,9 +301,6 @@
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
                                     </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -306,9 +318,6 @@
                                     </button>
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
-                                    </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -328,9 +337,6 @@
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
                                     </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -348,9 +354,6 @@
                                     </button>
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
-                                    </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -370,9 +373,6 @@
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
                                     </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -391,9 +391,6 @@
                                     <button class="action-button" title="Substituir" data-bs-toggle="tooltip">
                                         <i class="fas fa-exchange-alt"></i>
                                     </button>
-                                    <button class="action-button" title="Atribuir Responsável" data-bs-toggle="modal" data-bs-target="#assignResponsibleModal">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -401,9 +398,47 @@
                 </div>
             </div>
         </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-lg">
+            <div>
+                <p class="text-muted mb-0">Mostrando 1-6 de 42 documentos</p>
+            </div>
+            <nav aria-label="Navegação de página">
+                <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Próximo">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0 text-muted">© 2025 Gerenciadoc. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0 text-muted">Versão 1.0.0</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Modal Atribuir Responsável -->
+    <!-- Modal de Atribuir Responsável -->
     <div class="modal fade" id="assignResponsibleModal" tabindex="-1" aria-labelledby="assignResponsibleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -412,67 +447,35 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="documentName" class="form-label">Documento</label>
-                        <input type="text" class="form-control" id="documentName" value="Certidão Negativa de Débitos Federais" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="responsibleSelect" class="form-label">Responsável</label>
-                        <select class="form-select" id="responsibleSelect">
-                            <option selected>Selecione um responsável</option>
-                            <option>João Silva</option>
-                            <option>Maria Oliveira</option>
-                            <option>Carlos Mendes</option>
-                            <option>Ana Souza</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="notificationDate" class="form-label">Data para notificação</label>
-                        <input type="date" class="form-control" id="notificationDate">
-                        <div class="form-text">O responsável será notificado nesta data sobre o vencimento do documento.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="notificationNote" class="form-label">Observação (opcional)</label>
-                        <textarea class="form-control" id="notificationNote" rows="3"></textarea>
-                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="documentName" class="form-label">Documento</label>
+                            <input type="text" class="form-control" id="documentName" value="Certidão Negativa de Débitos Federais" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="responsibleSelect" class="form-label">Responsável</label>
+                            <select class="form-select" id="responsibleSelect">
+                                <option selected>Selecione um responsável</option>
+                                <option>João Silva</option>
+                                <option>Maria Oliveira</option>
+                                <option>Carlos Mendes</option>
+                                <option>Ana Santos</option>
+                                <option>Pedro Costa</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notificationDays" class="form-label">Notificar com antecedência (dias)</label>
+                            <input type="number" class="form-control" id="notificationDays" value="30">
+                        </div>
+                        <div class="mb-3">
+                            <label for="observations" class="form-label">Observações</label>
+                            <textarea class="form-control" id="observations" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Atribuir</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Substituir Documento -->
-    <div class="modal fade" id="substituirDocumentoModal" tabindex="-1" aria-labelledby="substituirDocumentoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="substituirDocumentoModalLabel">Substituir Documento</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="documentoAtual" class="form-label">Documento Atual</label>
-                        <input type="text" class="form-control" id="documentoAtual" value="Certidão Negativa de Débitos Federais" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="novoArquivo" class="form-label">Novo Arquivo</label>
-                        <input type="file" class="form-control" id="novoArquivo">
-                    </div>
-                    <div class="mb-3">
-                        <label for="novaValidade" class="form-label">Nova Data de Validade</label>
-                        <input type="date" class="form-control" id="novaValidade">
-                    </div>
-                    <div class="mb-3">
-                        <label for="observacaoSubstituicao" class="form-label">Observação (opcional)</label>
-                        <textarea class="form-control" id="observacaoSubstituicao" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Substituir Documento</button>
+                    <button type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
@@ -480,45 +483,17 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Funcionalidades de Documentos -->
+    
+    <!-- Custom Scripts -->
     <script src="js/documentos.js"></script>
-    <!-- Funcionalidade de Substituição de Documentos -->
     <script src="js/substituir-documento.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-            
-            // Toggle sidebar on mobile
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.querySelector('.sidebar');
-            
-            if (sidebarToggle) {
-                sidebarToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('show');
-                });
-            }
-            
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function(event) {
-                if (window.innerWidth < 768 && sidebar.classList.contains('show') && !sidebar.contains(event.target) && event.target !== sidebarToggle) {
-                    sidebar.classList.remove('show');
-                }
-            });
-            
-            // Adicionar evento para botões de substituir
-            const substituirButtons = document.querySelectorAll('[title="Substituir"]');
-            substituirButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const modal = new bootstrap.Modal(document.getElementById('substituirDocumentoModal'));
-                    modal.show();
-                });
-            });
-        });
+        // Inicializar tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 </body>
 </html>
