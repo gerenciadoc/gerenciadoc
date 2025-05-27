@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Design System CSS -->
     <link rel="stylesheet" href="css/design-system.css">
+    <!-- Top Menu CSS -->
+    <link rel="stylesheet" href="css/top-menu.css">
 </head>
 <body>
     <!-- Sidebar -->
@@ -64,33 +66,104 @@
         </button>
     </div>
 
+    <!-- Menu Superior -->
+    <div class="top-menu">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-end align-items-center py-2">
+                <div class="dropdown me-3">
+                    <button class="btn btn-icon position-relative" type="button" id="notificacoesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-notification" aria-labelledby="notificacoesDropdown">
+                        <li><h6 class="dropdown-header">Notificações</h6></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-warning fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Certidão Municipal vence em 5 dias</p>
+                                    <p class="text-muted small mb-0">Hoje, 09:45</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-file-alt text-primary fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Novo documento adicionado</p>
+                                    <p class="text-muted small mb-0">Ontem, 14:30</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-gavel text-info fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Licitação aberta amanhã</p>
+                                    <p class="text-muted small mb-0">Ontem, 10:15</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">Ver todas as notificações</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown me-3">
+                    <button class="btn btn-icon" type="button" id="ajudaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajudaDropdown">
+                        <li><a class="dropdown-item" href="#">Central de Ajuda</a></li>
+                        <li><a class="dropdown-item" href="#">Tutoriais</a></li>
+                        <li><a class="dropdown-item" href="#">Suporte Técnico</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center" type="button" id="usuarioDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="avatar-circle me-2">
+                            <span class="initials">JS</span>
+                        </div>
+                        <span class="d-none d-md-inline">João Silva</span>
+                        <i class="fas fa-chevron-down ms-2 small"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Meu Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <div class="main-content">
         <div class="page-header d-flex justify-content-between align-items-center">
             <div>
                 <h1 class="page-title">Dashboard</h1>
             </div>
-            <div class="d-flex align-items-center">
-                <div class="dropdown me-3">
+            <div>
+                <div class="dropdown">
                     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-filter me-1"></i> Filtrar
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         <li><a class="dropdown-item" href="#">Últimos 7 dias</a></li>
                         <li><a class="dropdown-item" href="#">Últimos 30 dias</a></li>
                         <li><a class="dropdown-item" href="#">Este mês</a></li>
                         <li><a class="dropdown-item" href="#">Este ano</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle me-1"></i> Usuário
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Configurações</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
                     </ul>
                 </div>
             </div>
