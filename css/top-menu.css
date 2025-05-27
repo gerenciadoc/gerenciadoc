@@ -1,0 +1,96 @@
+/**
+ * Gerenciadoc - Estilos para o Menu Superior
+ * Data: 27 de Maio de 2025
+ */
+
+.top-menu {
+    background-color: #fff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-circle .initials {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: #f8f9fa;
+    color: var(--primary);
+}
+
+/* Correção para dropdowns */
+.dropdown-menu {
+    min-width: 12rem;
+    padding: 0.5rem 0;
+    overflow: visible;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Ajuste para notificações */
+.dropdown-menu-notification {
+    width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+}
+
+/* Responsividade */
+@media (max-width: 767.98px) {
+    .dropdown-menu-notification {
+        width: 280px;
+    }
+}

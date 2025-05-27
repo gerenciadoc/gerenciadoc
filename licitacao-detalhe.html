@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Design System CSS -->
     <link rel="stylesheet" href="css/design-system.css">
+    <!-- Top Menu CSS -->
+    <link rel="stylesheet" href="css/top-menu.css">
 </head>
 <body>
     <!-- Sidebar -->
@@ -62,6 +64,88 @@
         <button class="btn btn-primary" id="sidebarToggle">
             <i class="fas fa-bars"></i>
         </button>
+    </div>
+
+    <!-- Menu Superior -->
+    <div class="top-menu">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-end align-items-center py-2">
+                <div class="dropdown me-3">
+                    <button class="btn btn-icon position-relative" type="button" id="notificacoesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-notification" aria-labelledby="notificacoesDropdown">
+                        <li><h6 class="dropdown-header">Notificações</h6></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-warning fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Certidão Municipal vence em 5 dias</p>
+                                    <p class="text-muted small mb-0">Hoje, 09:45</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-file-alt text-primary fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Novo documento adicionado</p>
+                                    <p class="text-muted small mb-0">Ontem, 14:30</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-gavel text-info fs-5"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0 fw-medium">Licitação aberta amanhã</p>
+                                    <p class="text-muted small mb-0">Ontem, 10:15</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">Ver todas as notificações</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown me-3">
+                    <button class="btn btn-icon" type="button" id="ajudaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajudaDropdown">
+                        <li><a class="dropdown-item" href="#">Central de Ajuda</a></li>
+                        <li><a class="dropdown-item" href="#">Tutoriais</a></li>
+                        <li><a class="dropdown-item" href="#">Suporte Técnico</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center" type="button" id="usuarioDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="avatar-circle me-2">
+                            <span class="initials">JS</span>
+                        </div>
+                        <span class="d-none d-md-inline">João Silva</span>
+                        <i class="fas fa-chevron-down ms-2 small"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Meu Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -172,6 +256,9 @@
                                     <button class="btn btn-sm btn-icon" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -189,6 +276,9 @@
                                     </button>
                                     <button class="btn btn-sm btn-icon" title="Editar">
                                         <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -208,6 +298,9 @@
                                     <button class="btn btn-sm btn-icon" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -226,6 +319,9 @@
                                     <button class="btn btn-sm btn-icon" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -241,65 +337,8 @@
                                     <button class="btn btn-sm btn-icon" title="Adicionar documento">
                                         <i class="fas fa-plus"></i>
                                     </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                    </div>
-                                </td>
-                                <td>Atestado de Capacidade Técnica</td>
-                                <td>Técnica</td>
-                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                    </div>
-                                </td>
-                                <td>Registro no CREA</td>
-                                <td>Técnica</td>
-                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                    </div>
-                                </td>
-                                <td>Contrato Social</td>
-                                <td>Habilitação Jurídica</td>
-                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                    </div>
-                                </td>
-                                <td>Balanço Patrimonial</td>
-                                <td>Qualificação</td>
-                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-icon" title="Adicionar documento">
-                                        <i class="fas fa-plus"></i>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -315,6 +354,9 @@
                                 <td>
                                     <button class="btn btn-sm btn-icon" title="Adicionar documento">
                                         <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon text-danger" title="Remover item">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -410,98 +452,6 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="documento-item p-3 border rounded mb-3">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
-                                    <div>
-                                        <h6 class="mb-1">Certidão Negativa Municipal</h6>
-                                        <p class="text-muted mb-1">Arquivo: certidao_municipal.pdf</p>
-                                        <p class="text-muted mb-0">Vencimento: 10/07/2025</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon me-1" title="Download">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="documento-item p-3 border rounded">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-file-pdf text-danger fs-4 me-3"></i>
-                                    <div>
-                                        <h6 class="mb-1">Certidão de Regularidade do FGTS</h6>
-                                        <p class="text-muted mb-1">Arquivo: certidao_fgts.pdf</p>
-                                        <p class="text-muted mb-0">Vencimento: 05/06/2025</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-icon me-1" title="Visualizar">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon me-1" title="Download">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon text-danger" title="Excluir">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Tab Trabalhista -->
-                    <div class="tab-pane fade" id="trabalhista" role="tabpanel" aria-labelledby="trabalhista-tab">
-                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
-                            <h5 class="text-muted mb-3">Nenhum documento trabalhista adicionado</h5>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
-                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Tab Técnica -->
-                    <div class="tab-pane fade" id="tecnica" role="tabpanel" aria-labelledby="tecnica-tab">
-                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
-                            <h5 class="text-muted mb-3">Nenhum documento técnico adicionado</h5>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
-                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Tab Qualificação -->
-                    <div class="tab-pane fade" id="qualificacao" role="tabpanel" aria-labelledby="qualificacao-tab">
-                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
-                            <h5 class="text-muted mb-3">Nenhum documento de qualificação adicionado</h5>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
-                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Tab Habilitação Jurídica -->
-                    <div class="tab-pane fade" id="juridica" role="tabpanel" aria-labelledby="juridica-tab">
-                        <div class="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i class="fas fa-file-alt text-muted fs-1 mb-3"></i>
-                            <h5 class="text-muted mb-3">Nenhum documento de habilitação jurídica adicionado</h5>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadArquivoModal">
-                                <i class="fas fa-upload me-2"></i> Fazer upload de documento
-                            </button>
                         </div>
                     </div>
                     
@@ -614,7 +564,7 @@
                                     </td>
                                     <td>Certidão Negativa de Débitos Trabalhistas</td>
                                     <td>Trabalhista</td>
-                                    <td>15/08/2025</td>
+                                    <td>30/09/2025</td>
                                     <td>certidao_trabalhista.pdf</td>
                                 </tr>
                                 <tr>
@@ -623,10 +573,10 @@
                                             <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio2">
                                         </div>
                                     </td>
-                                    <td>Atestado de Capacidade Técnica</td>
-                                    <td>Técnica</td>
-                                    <td>Indeterminado</td>
-                                    <td>atestado_capacidade.pdf</td>
+                                    <td>Balanço Patrimonial</td>
+                                    <td>Qualificação</td>
+                                    <td>31/12/2025</td>
+                                    <td>balanco_patrimonial.pdf</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -634,44 +584,18 @@
                                             <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio3">
                                         </div>
                                     </td>
-                                    <td>Registro no CREA</td>
+                                    <td>Atestado de Capacidade Técnica</td>
                                     <td>Técnica</td>
-                                    <td>30/12/2025</td>
-                                    <td>registro_crea.pdf</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio4">
-                                        </div>
-                                    </td>
-                                    <td>Contrato Social</td>
-                                    <td>Habilitação Jurídica</td>
                                     <td>Indeterminado</td>
-                                    <td>contrato_social.pdf</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="documentoRadio" id="documentoRadio5">
-                                        </div>
-                                    </td>
-                                    <td>Balanço Patrimonial</td>
-                                    <td>Qualificação</td>
-                                    <td>31/12/2025</td>
-                                    <td>balanco_patrimonial.pdf</td>
+                                    <td>atestado_capacidade.pdf</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
-                    <div class="alert alert-info mt-3">
-                        <i class="fas fa-info-circle me-2"></i> O documento selecionado será associado a esta licitação e adicionado ao checklist automaticamente.
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar Documento</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Adicionar Documento</button>
                 </div>
             </div>
         </div>
@@ -686,11 +610,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-muted mb-4">Faça o upload de um novo arquivo para associar a esta licitação.</p>
+                    <p class="text-muted mb-4">Faça o upload de um novo arquivo para esta licitação.</p>
                     
                     <div class="mb-3">
                         <label for="nomeDocumento" class="form-label">Nome do Documento</label>
-                        <input type="text" class="form-control" id="nomeDocumento" placeholder="Ex: Certidão Negativa Federal">
+                        <input type="text" class="form-control" id="nomeDocumento">
                     </div>
                     
                     <div class="mb-3">
@@ -707,61 +631,53 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="dataValidade" class="form-label">Data de Validade</label>
-                        <input type="date" class="form-control" id="dataValidade">
-                        <div class="form-text">Deixe em branco para documentos sem data de validade.</div>
+                        <label for="validadeDocumento" class="form-label">Data de Validade</label>
+                        <input type="date" class="form-control" id="validadeDocumento">
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Arquivo</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="arquivoUpload">
-                            <button class="btn btn-outline-primary" type="button">Upload</button>
-                        </div>
-                        <div class="form-text">Formatos aceitos: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG (máx. 10MB)</div>
+                        <label for="arquivoUpload" class="form-label">Arquivo</label>
+                        <input type="file" class="form-control" id="arquivoUpload">
                     </div>
                     
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="adicionarChecklist">
-                        <label class="form-check-label" for="adicionarChecklist">
-                            Adicionar ao checklist da licitação
-                        </label>
+                    <div class="mb-3">
+                        <label for="observacaoDocumento" class="form-label">Observação (opcional)</label>
+                        <textarea class="form-control" id="observacaoDocumento" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Salvar Documento</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Fazer Upload</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
     <script>
-        // Mobile sidebar toggle
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('show');
-        });
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.querySelector('.sidebar');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle sidebar on mobile
             const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
             
-            if (window.innerWidth < 768 && 
-                !sidebar.contains(event.target) && 
-                !sidebarToggle.contains(event.target) &&
-                sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                });
             }
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 768 && sidebar.classList.contains('show') && !sidebar.contains(event.target) && event.target !== sidebarToggle) {
+                    sidebar.classList.remove('show');
+                }
+            });
         });
     </script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Funcionalidades de Detalhes da Licitação -->
     <script src="js/licitacao-detalhe.js"></script>
+    <!-- Funcionalidade de Remover Itens do Checklist -->
+    <script src="js/checklist-remover.js"></script>
 </body>
 </html>
